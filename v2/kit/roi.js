@@ -22,10 +22,10 @@ const SP = 58, W = 30, D = 30, HU = 44; // slot spacing, footprint, height per 1
 export const T = { grow: 700, stagger: 110, sortAt: 1500, sort: 900, rankAt: 2400, end: 3100 };
 
 export const ROI_CSS = `
-.dg .box.hov polygon{stroke:var(--accent);stroke-opacity:1}
-.dg .box.hov .ft{fill:var(--pale-2)}
+.dg .box.hov polygon{stroke:var(--ocean);stroke-opacity:1}
+.dg .box.hov .ft{fill:var(--blue-200)}
 .dg .mult{font-size:11px}
-.dg .mult.top{fill:var(--hi,var(--accent))}
+.dg .mult.top{fill:var(--forest)}
 `;
 
 export function roiChart(svg, { reduced = false, onFrame = () => {} } = {}) {
