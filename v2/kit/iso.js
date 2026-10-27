@@ -1,5 +1,5 @@
 // Isometric drafting kit shared by the V02 diagrams. Lifted from V02 "Where we came in"
-// (Braden's original, commit 8a262f2) so every figure uses the same projection and faces.
+// (commit 8a262f2) so every figure uses the same projection and faces.
 //
 //   const P = Iso(ox, oy, u);   P(x, y, z) -> [sx, sy]; x runs right-down, y left-down, z up
 //   box(P, x, y, z, w, d, h, cls)   a prism with left, right and top faces
@@ -57,12 +57,12 @@ export function setViewBox(svg, b, pad) {
 export const DRAFT_CSS = `
 .dg{overflow:visible}
 .dg .box polygon{stroke:var(--ink);stroke-width:.9;stroke-linejoin:round;stroke-opacity:.72;transition:fill .45s,stroke .45s}
-.dg .ft{fill:#fff}.dg .fl{fill:#cedbc3}.dg .fr{fill:#e8eedf}
-.dg .box.hl polygon{stroke:var(--hl-top,var(--accent));stroke-opacity:1}
-.dg .box.hl .ft{fill:var(--hl-top,var(--accent))}.dg .box.hl .fl{fill:var(--hl-left,#2c5240)}.dg .box.hl .fr{fill:var(--hl-right,#4f8068)}
+.dg .ft{fill:var(--paper-raised)}.dg .fl{fill:var(--blue-200)}.dg .fr{fill:var(--blue-100)}
+.dg .box.hl polygon{stroke:var(--forest);stroke-opacity:1}
+.dg .box.hl .ft{fill:var(--green-200)}.dg .box.hl .fl{fill:var(--green-400)}.dg .box.hl .fr{fill:var(--green-300)}
 .dg .base{fill:none;stroke:var(--ink);stroke-opacity:.3;stroke-dasharray:3 4}
-.dg text{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;fill:var(--ink);text-transform:uppercase;paint-order:stroke;stroke:var(--page);stroke-width:4px;stroke-linejoin:round}
-.dg text.sm{font-size:9.5px;fill:var(--muted)}
-.dg text.acc{fill:var(--accent)}
-.dg .ppl path,.dg .ppl circle{fill:#fff;stroke:var(--ink);stroke-width:1}
+.dg text{font-family:var(--f-mono);font-size:10.5px;font-weight:500;letter-spacing:.08em;fill:var(--ink);text-transform:uppercase;paint-order:stroke;stroke:var(--paper-raised);stroke-width:4px;stroke-linejoin:round}
+.dg text.sm{font-size:9.5px;fill:var(--ink-muted)}
+.dg text.acc{fill:var(--ocean)}
+.dg .ppl path,.dg .ppl circle{fill:var(--paper-raised);stroke:var(--ink);stroke-width:1}
 `;
