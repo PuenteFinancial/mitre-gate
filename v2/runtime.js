@@ -1,7 +1,6 @@
-// V02 runtime (from Topsail, rebranded for Mitre /ai). build_site.py pre-renders every section into a declarative shadow root, so
-// the content is in the HTML before any script runs; this only starts each section's own script,
-// with the same context the mockup composer gives it (a shared event bus and scroll-to-section).
-// Section sources live in mockups/homepage-composer/sections; rebuild with build_site.py.
+// Mitre runtime. Every section is pre-rendered into a declarative shadow root, so the content is in
+// the HTML before any script runs; this only starts each section's own script, with a shared event
+// bus and scroll-to-section.
 
 const NAV_H = 64;
 const page = document.getElementById("page");
@@ -38,7 +37,7 @@ slots.forEach((slot, i) => {
   }
 });
 
-// "See our offering": the homepage's offering, or the first offer on the private equity page
+// "See our offering": the homepage's offering,
 document.querySelectorAll("[data-offer]").forEach((a) => a.addEventListener("click", (e) => {
   if (scrollToSlot("pillars") || scrollToSlot("proof")) e.preventDefault();
   const menu = document.getElementById("mobileMenu");

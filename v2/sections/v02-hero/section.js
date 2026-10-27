@@ -1,9 +1,8 @@
-// V02 hero: "The leading AI department for [industry]". Opens on private equity, then the word
+// V02 hero: "The leading AI department for [industry]". Opens on software, then the word
 // rolls through the major industry categories, every word on the same timing.
-// The roller is V01's (per-character masked roll); the bus protocol for the old industry panel is gone.
+// The roller is a per-character masked roll.
 
 const INDUSTRIES = [
-  { word: "private equity" },
   { word: "software" },
   { word: "healthcare" },
   { word: "construction" },

@@ -1,5 +1,4 @@
-// Isometric ROI chart shared by the V02 homepage (01 AI Strategy & Roadmapping) and the V02
-// private equity page (01 Due diligence). Six opportunity columns rise in a scrambled order,
+// Isometric ROI chart shared by the V02 homepage (01 AI Strategy & Roadmapping). Six opportunity columns rise in a scrambled order,
 // slide into rank order, and the top one is marked to build first.
 //
 //   const chart = roiChart(svg, { reduced, onFrame });
@@ -9,7 +8,7 @@
 //   onFrame(t, ranked)     called on every frame, e.g. to light up a ranked list
 import { Iso, box, flat, f1, setViewBox, clamp01, easeInOut, easeOut } from "./iso.js";
 
-// Illustrative, and the same example workflows the live private equity page uses.
+// Illustrative.
 export const ROADMAP = [
   { name: "Invoice processing", m: 4.2 },
   { name: "Customer onboarding", m: 3.1 },

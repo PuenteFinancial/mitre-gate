@@ -1,6 +1,6 @@
-// Client logo loop, ported from the live site's app.js: a continuous drift that can be
+// Client logo loop, a continuous drift that can be
 // dragged or flung. The track holds identical sets, so wrapping the offset by one set's width is
-// seamless. Includes the live fix from bbc6bf5 (Oct 1): two sets leave a blank stretch before the
+// seamless. Two sets leave a blank stretch before the
 // wrap on screens wider than one set, so copies are added until the window is always covered.
 function mount(root, ctx) {
   if (ctx.reducedMotion) return function () {};

@@ -1,9 +1,8 @@
 // V02 · The Mitre experience. 01 AI Strategy & Roadmapping draws the shared isometric ROI chart
 // (kit/roi.js) beside a ranked list that lights up once the columns are in rank order.
 //
-// This section also owns the scroll guide on the right edge: the four offerings, shown only while
-// the offering sections (this one, Data & AI Engineering, Evaluate & Improve, the private equity
-// card) are on screen. The current item follows the scroll. Clicking an item sends 'offering-go'
+// This section also owns the scroll guide on the right edge: the three offerings, shown only while
+// the offering sections (this one, Data & AI Engineering, Evaluate & Improve) are on screen. The current item follows the scroll. Clicking an item sends 'offering-go'
 // {key}; every V02 section answers for the keys it owns.
 import { DRAFT_CSS } from "../../kit/iso.js";
 import { roiChart, ROI_CSS, T } from "../../kit/roi.js";
@@ -58,13 +57,12 @@ function mount(root, ctx) {
   function update() {
     queued = false;
     const line = window.innerHeight * 0.45;
-    const mf = slot("story"), ev = slot("evaluate"), pe = slot("pe");
-    const last = pe || mf || ctx.host;
+    const mf = slot("story"), ev = slot("evaluate");
+    const last = ev || mf || ctx.host;
     const inRange = section.getBoundingClientRect().top <= line && last.getBoundingClientRect().bottom >= line;
     snav.classList.toggle("on", inRange);
     let cur = 0;
-    if (pe && pe.getBoundingClientRect().top <= line) cur = 3;
-    else if (ev && ev.getBoundingClientRect().top <= line) cur = 2;
+    if (ev && ev.getBoundingClientRect().top <= line) cur = 2;
     else if (mf && mf.getBoundingClientRect().top <= line) cur = 1;
     items.forEach((b, k) => b.setAttribute("aria-current", String(k === cur)));
   }
