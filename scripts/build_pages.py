@@ -264,29 +264,7 @@ HOME_MAIN = f"""
       </div>
     </section>
 
-    <section class="sec" aria-labelledby="duo-title">
-      <div class="wrap">
-        <h2 class="h-section" id="duo-title">After launch, you choose who runs it.</h2>
-        <div class="duo">
-          <article class="duo__card">
-            {ph("photo", "Photo placeholder", "ph--dark")}
-            <p class="eyebrow">Option 1</p>
-            <h3>Hand it off to your team.</h3>
-            <p>We hand over the code, tests, documentation and runbooks, then work alongside your engineers until they run it themselves.</p>
-            <a class="btn btn--light" href="/services/">Learn more <span aria-hidden="true">→</span></a>
-          </article>
-          <article class="duo__card">
-            {ph("photo", "Photo placeholder", "ph--mix")}
-            <p class="eyebrow">Option 2</p>
-            <h3>Mitre runs it as your AI department.</h3>
-            <p>We watch quality and cost in production and keep improving the system as your business changes. Often the choice for teams without in-house AI talent.</p>
-            <a class="btn btn--light" href="/services/">Learn more <span aria-hidden="true">→</span></a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="sec" style="padding-top:0" aria-labelledby="promise-title">
+    <section class="sec" aria-labelledby="promise-title">
       <div class="wrap split">
         {ph("photo", "Photo placeholder", "split__ph")}
         <div>

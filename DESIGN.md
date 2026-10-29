@@ -81,7 +81,6 @@ Further down the homepage:
   sideways scroller under 960px.
 - **Feature panel** (`.feature`): full-width `--green-50` band, text and button on the left, a large
   rounded visual on the right.
-- **Duo cards** (`.duo`): two tall image cards with a dark gradient, a serif headline and a light button.
 - **Split** (`.split`): a wide photo on the left, eyebrow, headline, lede and button on the right.
 - **Careers band** (`.careers`): `--blue-50` half with text and two buttons, and a patterned half
   with a framed photo.
@@ -90,6 +89,9 @@ Further down the homepage:
 - **Footer** (`.foot`): light, with a serif tagline ("Level up through AI transformation."), a
   two-column nav, and a "How can we help?" block with a Contact button. The bottom row holds the
   logo, © and email.
+
+Also styled but not on any page: **duo cards** (`.duo`), two tall image cards with a dark gradient, a serif headline and a light button. Removed from
+the homepage 2026-10-29; markup in `git show b91eac5:index.html`.
 
 Placeholder subpages use `.phero` (centered eyebrow, display title and lede) plus a wide
 `.phero__ph` placeholder block.
