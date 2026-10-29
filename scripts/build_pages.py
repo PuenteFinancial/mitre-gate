@@ -168,13 +168,13 @@ logos = "\n".join(f'              <img src="/assets/logos/{f}" alt="{a}"{f" clas
 logos_dup = re.sub(r' alt="[^"]*"', ' alt=""', logos)
 
 OFFER = [
-    ("01", "Strategy", "AI strategy &amp; roadmapping",
+    ("01", "Strategy", "Data Led Strategy",
      "We interview the people who run each function and measure where time and money go. Every opportunity is scored on value against cost, so your roadmap is ranked by return and priced by the engineers who would build it.",
      "Animation: opportunities ranked by return"),
-    ("02", "Engineering", "Data &amp; AI engineering",
+    ("02", "Implementation", "Embedded Implementation",
      "We build the data foundation first, then the agents and applications on top of it, all reading from one current model of your business.",
      "Animation: one Manifest under every agent"),
-    ("03", "Evaluation", "Evaluate &amp; improve",
+    ("03", "Performance", "Continual Performance Improvement",
      "Every system is measured against how the work ran before, and tested again with every change. It earns its place by beating that baseline.",
      "Animation: weekly scores against the baseline"),
 ]
@@ -182,11 +182,10 @@ cards = "\n".join(f"""        <article class="card">
           {ph("anim", anim, "ph--g" if n == "02" else "")}
           <div class="card__chip"><b>{n}</b><span>{chip}</span></div>
           <div class="card__panel">
-            <p class="eyebrow">Our offering</p>
             <h3>{title}</h3>
             <div class="card__more"><div>
               <p>{body}</p>
-              <a class="btn btn--primary" href="/services/">Learn more <span aria-hidden="true">→</span></a>
+              <a class="btn btn--primary" href="/services/">Our Service <span aria-hidden="true">→</span></a>
             </div></div>
           </div>
         </article>""" for n, chip, title, body, anim in OFFER)
@@ -244,7 +243,7 @@ HOME_MAIN = f"""
             <h2 class="h-section" id="offer-title">From strategy to systems that run.</h2>
             <p class="lede">We find where AI pays off, build the systems that capture it, and measure every one against how the work ran before.</p>
           </div>
-          <a class="more" href="/services/">How we work</a>
+          <a class="more" href="/services/">See our full service</a>
         </div>
         <div class="cards">
 {cards}
@@ -255,8 +254,8 @@ HOME_MAIN = f"""
     <section class="feature" aria-labelledby="feature-title">
       <div class="wrap feature__in">
         <div>
-          <p class="eyebrow">The data foundation</p>
-          <h2 class="h-section" id="feature-title">One Manifest under everything we build.</h2>
+          <p class="eyebrow">Trade Financing</p>
+          <h2 class="h-section" id="feature-title">Payments and cash management that accelerate growth.</h2>
           <p class="lede">AI stalls when every tool keeps its own copy of the data. We start by building your Manifest: one model of the records your business runs on, kept current from every system that holds them. Agents and applications read from it and act through approved steps.</p>
           <a class="btn btn--primary" href="/services/">How we build <span aria-hidden="true">→</span></a>
         </div>
@@ -268,10 +267,10 @@ HOME_MAIN = f"""
       <div class="wrap split">
         {ph("photo", "Photo placeholder", "split__ph")}
         <div>
-          <p class="eyebrow">Our promise</p>
-          <h2 class="h-section" id="promise-title">Model-agnostic. Yours to keep.</h2>
+          <p class="eyebrow">Careers at Mitre</p>
+          <h2 class="h-section" id="promise-title">Extreme ownership is the only qualification.</h2>
           <p class="lede">We take no fees or kickbacks from model labs or software vendors. Everything we build stays yours, down to the code and the accounts it runs on.</p>
-          <a class="btn btn--primary" href="/contact/">Talk to us <span aria-hidden="true">→</span></a>
+          <a class="btn btn--primary" href="/careers/">Explore Careers <span aria-hidden="true">→</span></a>
         </div>
       </div>
     </section>
