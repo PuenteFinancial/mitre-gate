@@ -47,7 +47,7 @@
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; overflow-x: clip; scroll-padding-top: 96px; }
 body { margin: 0; background: var(--paper); color: var(--ink); font: 400 16px/26px var(--f-sans); -webkit-font-smoothing: antialiased; overflow-x: clip; }
-img { max-width: 100%; }
+img { max-width: 100%; height: auto; }
 button { font: inherit; }
 h1, h2, h3, p { margin: 0; }
 a { color: var(--ocean); text-decoration: none; }
@@ -146,10 +146,10 @@ a { color: var(--ocean); text-decoration: none; }
 .slide { position: absolute; top: 0; left: 50%; width: var(--cell, 250px); height: 100%; transition: transform .8s var(--ease); cursor: pointer; }
 .slide.is-active { cursor: default; }
 .car:not(.is-ready) .slide, .car:not(.is-ready) .slide__media { transition: none; }
-.slide__media { position: absolute; inset: 0; border-radius: 4px; transform: scale(var(--s, 1)); transition: transform .8s var(--ease), border-radius .8s; }
+.slide__media { position: absolute; inset: 0; overflow: hidden; border-radius: 4px; transform: scale(var(--s, 1)); transition: transform .8s var(--ease), border-radius .8s; }
 .slide.is-active .slide__media { border-radius: var(--radius-sm); }
 .slide__media > .ph { position: absolute; inset: 0; border-radius: inherit; }
-.slide__media > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: inherit; background: var(--blue-100); }
+.slide__media > img { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; object-position: center; border-radius: inherit; background: var(--blue-100); }
 .slide__chip { position: absolute; z-index: 2; top: 12px; left: 12px; padding: 6px 10px; border-radius: 999px; background: var(--glass); backdrop-filter: blur(10px);
   font: 700 11px/14px var(--f-sans); letter-spacing: .08em; text-transform: uppercase; color: var(--ink); }
 .slide__card { position: absolute; z-index: 2; left: 10px; right: 10px; bottom: 10px; padding: 14px; text-align: left; border-radius: var(--radius-sm);
