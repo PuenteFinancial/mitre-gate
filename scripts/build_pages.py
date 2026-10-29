@@ -291,16 +291,14 @@ HOME_MAIN = f"""
       </div>
     </section>
 
-    <section class="news" id="newsletter" aria-labelledby="news-title">
-      <div class="wrap news__in">
-        <div>
-          <p class="eyebrow">The Mitre Dispatch</p>
-          <h2 class="h-section" id="news-title">One useful email a month: what we build, what we learn, and the use-cases worth stealing.</h2>
-        </div>
-        {ph("photo", "Photo placeholder", "news__ph")}
-        <div class="news__bar">
-          <p>Get the Dispatch in your inbox. No fluff, no forwarded webinars.</p>
-          <a class="btn btn--light" href="mailto:{MAIL}?subject=Subscribe%20to%20The%20Mitre%20Dispatch">Subscribe <span aria-hidden="true">→</span></a>
+    <section class="reach" id="contact" aria-labelledby="reach-title">
+      <div class="wrap reach__in">
+        <p class="eyebrow">Contact us</p>
+        <h2 class="h-section" id="reach-title">Ready to put AI to work?</h2>
+        <p class="lede">Tell us what you're working on. A real person reads every note.</p>
+        <div class="reach__btns">
+          <a class="btn btn--light" href="/contact/">Contact us <span aria-hidden="true">→</span></a>
+          <a class="reach__mail" href="mailto:{MAIL}">{MAIL}</a>
         </div>
       </div>
     </section>

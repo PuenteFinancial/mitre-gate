@@ -84,7 +84,8 @@ Further down the homepage:
 - **Split** (`.split`): a wide photo on the left, eyebrow, headline, lede and button on the right.
 - **Careers band** (`.careers`): `--blue-50` half with text and two buttons, and a patterned half
   with a framed photo.
-- **Dispatch band** (`.news`): dark blue band, headline and photo, with a translucent signup bar below.
+- **Contact band** (`.reach`): full-width dark blue band, centered eyebrow, headline and lede, with a
+  `.btn--light` Contact us button next to the email link.
 
 - **Footer** (`.foot`): light, with a serif tagline ("Level up through AI transformation."), a
   two-column nav, and a "How can we help?" block with a Contact button. The bottom row holds the
