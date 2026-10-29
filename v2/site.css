@@ -149,12 +149,15 @@ a { color: var(--ocean); text-decoration: none; }
 .slide__media { position: absolute; inset: 0; border-radius: 4px; transform: scale(var(--s, 1)); transition: transform .8s var(--ease), border-radius .8s; }
 .slide.is-active .slide__media { border-radius: var(--radius-sm); }
 .slide__media > .ph { position: absolute; inset: 0; border-radius: inherit; }
+.slide__media > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: inherit; background: var(--blue-100); }
 .slide__chip { position: absolute; z-index: 2; top: 12px; left: 12px; padding: 6px 10px; border-radius: 999px; background: var(--glass); backdrop-filter: blur(10px);
   font: 700 11px/14px var(--f-sans); letter-spacing: .08em; text-transform: uppercase; color: var(--ink); }
 .slide__card { position: absolute; z-index: 2; left: 10px; right: 10px; bottom: 10px; padding: 14px; text-align: left; border-radius: var(--radius-sm);
   background: var(--glass); backdrop-filter: blur(12px); }
-.slide__chip, .slide__card { opacity: 0; visibility: hidden; transform: translateY(6px); transition: opacity .35s, transform .35s var(--ease), visibility .35s; }
-.slide.is-active .slide__chip, .slide.is-active .slide__card { opacity: 1; visibility: visible; transform: none; transition-delay: .35s; }
+/* the card leaves at once when its slide steps aside, and fades in once the new center photo has settled */
+.slide__chip, .slide__card { opacity: 0; visibility: hidden; transform: translateY(6px); transition: none; }
+.slide.is-active .slide__chip, .slide.is-active .slide__card { opacity: 1; visibility: visible; transform: none;
+  transition: opacity .35s .45s, transform .35s .45s var(--ease), visibility 0s .45s; }
 .slide__meta { font: 700 10px/14px var(--f-sans); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-muted); }
 .slide__title { margin-top: 6px; font: 600 18px/24px var(--f-sans); color: var(--ink);
   display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
