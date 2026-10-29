@@ -265,7 +265,7 @@ HOME_MAIN = f"""
 
     <section class="sec" aria-labelledby="promise-title">
       <div class="wrap split">
-        {ph("photo", "Photo placeholder", "split__ph")}
+        <img class="split__ph split__img" src="/assets/photos/mitre-building.jpg?v={ver("assets/photos/mitre-building.jpg")}" alt="The Mitre logo on the front of an office building against a blue sky" width="1600" height="1066" loading="lazy" decoding="async" />
         <div>
           <p class="eyebrow">Careers at Mitre</p>
           <h2 class="h-section" id="promise-title">Extreme ownership is the only qualification.</h2>

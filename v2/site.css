@@ -288,6 +288,7 @@ a { color: var(--ocean); text-decoration: none; }
 /* ---------- split: photo and statement ---------- */
 .split { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 40px 64px; align-items: center; }
 .split__ph { aspect-ratio: 16 / 10; border-radius: var(--radius-md); }
+.split__img { display: block; width: 100%; height: auto; object-fit: cover; object-position: 20% 30%; }
 .split h2 { margin-top: 14px; }
 .split .lede { margin-top: 18px; }
 .split .btn { margin-top: 28px; }
