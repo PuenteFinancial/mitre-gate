@@ -74,12 +74,7 @@ Live on the homepage now:
 - **Logo marquee** (`.logos`): a static label ("Experience working on diverse teams") with logos
   scrolling in a loop (40s, pauses on hover, edges faded). Logos are grayscale at 65% opacity.
   With reduced motion it becomes a static row.
-- **Footer** (`.foot`): light, with a serif tagline, a two-column nav, and a "How can we help?"
-  block with a Contact button. Above the bottom row: logo, ©, email.
-
-The **section kit** below is styled in `v2/site.css` but not on any page yet. It was removed from the
-homepage on 2026-10-29. To reuse one, copy its markup from `index.html` at commit `3b84711`
-(`git show 3b84711:index.html`) into `scripts/build_pages.py`:
+Further down the homepage:
 
 - **Offering cards** (`.cards` / `.card`): three 4:5 cards with an animation background, a numbered
   glass chip top-left, and a glass panel bottom-left that reveals its text on hover. They become a
@@ -91,6 +86,10 @@ homepage on 2026-10-29. To reuse one, copy its markup from `index.html` at commi
 - **Careers band** (`.careers`): `--blue-50` half with text and two buttons, and a patterned half
   with a framed photo.
 - **Dispatch band** (`.news`): dark blue band, headline and photo, with a translucent signup bar below.
+
+- **Footer** (`.foot`): light, with a serif tagline ("Level up through AI transformation."), a
+  two-column nav, and a "How can we help?" block with a Contact button. The bottom row holds the
+  logo, © and email.
 
 Placeholder subpages use `.phero` (centered eyebrow, display title and lede) plus a wide
 `.phero__ph` placeholder block.

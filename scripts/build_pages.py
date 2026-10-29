@@ -167,6 +167,30 @@ logos = "\n".join(f'              <img src="/assets/logos/{f}" alt="{a}"{f" clas
 
 logos_dup = re.sub(r' alt="[^"]*"', ' alt=""', logos)
 
+OFFER = [
+    ("01", "Strategy", "AI strategy &amp; roadmapping",
+     "We interview the people who run each function and measure where time and money go. Every opportunity is scored on value against cost, so your roadmap is ranked by return and priced by the engineers who would build it.",
+     "Animation: opportunities ranked by return"),
+    ("02", "Engineering", "Data &amp; AI engineering",
+     "We build the data foundation first, then the agents and applications on top of it, all reading from one current model of your business.",
+     "Animation: one Manifest under every agent"),
+    ("03", "Evaluation", "Evaluate &amp; improve",
+     "Every system is measured against how the work ran before, and tested again with every change. It earns its place by beating that baseline.",
+     "Animation: weekly scores against the baseline"),
+]
+cards = "\n".join(f"""        <article class="card">
+          {ph("anim", anim, "ph--g" if n == "02" else "")}
+          <div class="card__chip"><b>{n}</b><span>{chip}</span></div>
+          <div class="card__panel">
+            <p class="eyebrow">Our offering</p>
+            <h3>{title}</h3>
+            <div class="card__more"><div>
+              <p>{body}</p>
+              <a class="btn btn--primary" href="/services/">Learn more <span aria-hidden="true">→</span></a>
+            </div></div>
+          </div>
+        </article>""" for n, chip, title, body, anim in OFFER)
+
 HOME_MAIN = f"""
   <main id="page">
     <section class="hero" aria-labelledby="hero-title">
@@ -209,6 +233,96 @@ HOME_MAIN = f"""
 {logos_dup}
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="offering" aria-labelledby="offer-title">
+      <div class="wrap">
+        <div class="sec__head">
+          <div>
+            <h2 class="h-section" id="offer-title">From strategy to systems that run.</h2>
+            <p class="lede">We find where AI pays off, build the systems that capture it, and measure every one against how the work ran before.</p>
+          </div>
+          <a class="more" href="/services/">How we work</a>
+        </div>
+        <div class="cards">
+{cards}
+        </div>
+      </div>
+    </section>
+
+    <section class="feature" aria-labelledby="feature-title">
+      <div class="wrap feature__in">
+        <div>
+          <p class="eyebrow">The data foundation</p>
+          <h2 class="h-section" id="feature-title">One Manifest under everything we build.</h2>
+          <p class="lede">AI stalls when every tool keeps its own copy of the data. We start by building your Manifest: one model of the records your business runs on, kept current from every system that holds them. Agents and applications read from it and act through approved steps.</p>
+          <a class="btn btn--primary" href="/services/">How we build <span aria-hidden="true">→</span></a>
+        </div>
+        {ph("anim", "Animation placeholder: the Manifest", "ph--g feature__vis")}
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="duo-title">
+      <div class="wrap">
+        <h2 class="h-section" id="duo-title">After launch, you choose who runs it.</h2>
+        <div class="duo">
+          <article class="duo__card">
+            {ph("photo", "Photo placeholder", "ph--dark")}
+            <p class="eyebrow">Option 1</p>
+            <h3>Hand it off to your team.</h3>
+            <p>We hand over the code, tests, documentation and runbooks, then work alongside your engineers until they run it themselves.</p>
+            <a class="btn btn--light" href="/services/">Learn more <span aria-hidden="true">→</span></a>
+          </article>
+          <article class="duo__card">
+            {ph("photo", "Photo placeholder", "ph--mix")}
+            <p class="eyebrow">Option 2</p>
+            <h3>Mitre runs it as your AI department.</h3>
+            <p>We watch quality and cost in production and keep improving the system as your business changes. Often the choice for teams without in-house AI talent.</p>
+            <a class="btn btn--light" href="/services/">Learn more <span aria-hidden="true">→</span></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" style="padding-top:0" aria-labelledby="promise-title">
+      <div class="wrap split">
+        {ph("photo", "Photo placeholder", "split__ph")}
+        <div>
+          <p class="eyebrow">Our promise</p>
+          <h2 class="h-section" id="promise-title">Model-agnostic. Yours to keep.</h2>
+          <p class="lede">We take no fees or kickbacks from model labs or software vendors. Everything we build stays yours, down to the code and the accounts it runs on.</p>
+          <a class="btn btn--primary" href="/contact/">Talk to us <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="careers" aria-labelledby="careers-title">
+      <div class="careers__txt">
+        <p class="eyebrow">Careers at Mitre</p>
+        <h2 class="h-section" id="careers-title">Build AI that businesses actually run on.</h2>
+        <p class="lede">We're a small team of engineers who embed with operators and ship. If that sounds like your kind of work, we'd like to hear from you.</p>
+        <div class="careers__btns">
+          <a class="btn btn--outline" href="/careers/">Explore careers</a>
+          <a class="btn btn--primary" href="/careers/">See open roles <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <div class="careers__art">
+        <div class="careers__frame">{ph("photo", "Team photo placeholder", "ph--g")}</div>
+      </div>
+    </section>
+
+    <section class="news" id="newsletter" aria-labelledby="news-title">
+      <div class="wrap news__in">
+        <div>
+          <p class="eyebrow">The Mitre Dispatch</p>
+          <h2 class="h-section" id="news-title">One useful email a month: what we build, what we learn, and the use-cases worth stealing.</h2>
+        </div>
+        {ph("photo", "Photo placeholder", "news__ph")}
+        <div class="news__bar">
+          <p>Get the Dispatch in your inbox. No fluff, no forwarded webinars.</p>
+          <a class="btn btn--light" href="mailto:{MAIL}?subject=Subscribe%20to%20The%20Mitre%20Dispatch">Subscribe <span aria-hidden="true">→</span></a>
         </div>
       </div>
     </section>
