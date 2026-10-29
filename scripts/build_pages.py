@@ -315,7 +315,7 @@ HOME_DESC = "Mitre embeds engineers in your business to find where AI creates va
 write("/", head("/", "Mitre Global | AI implementation that drives real operational efficiency", HOME_DESC, False) + header("/") + HOME_MAIN + footer())
 
 # ---------------- placeholder subpages ----------------
-def subpage(path, eyebrow, h1, lede, extra="", banner=True, title=None):
+def subpage(path, eyebrow, h1, lede, extra="", banner=True, title=None, banner_label="Page content coming soon"):
     main = f"""
   <main id="page">
     <section class="phero">
@@ -326,7 +326,7 @@ def subpage(path, eyebrow, h1, lede, extra="", banner=True, title=None):
       </div>
     </section>
     <section class="sec" style="padding-top:0">
-      <div class="wrap">{ph("anim", "Page content coming soon", "phero__ph") if banner else ""}</div>
+      <div class="wrap">{ph("anim", banner_label, "phero__ph") if banner else ""}</div>
     </section>
   </main>
 """
@@ -338,7 +338,7 @@ subpage("/services/", "Services", "Services", "What we build with you, and how w
 subpage("/financing/", "Financing", "Financing", "How we make the work easy to fund. This page is on its way.")
 subpage("/industries/", "Industries", "Where we work.", "We embed with operators in six industries. Pick yours to see how we help.",
         extra="\n" + pills("Choose an industry"))
-subpage("/careers/", "Careers", "Careers", "Open roles at Mitre. This page is on its way.")
+subpage("/careers/", "Work with us", "Careers", "Open roles at Mitre.", title="Careers", banner_label="No open roles at this time.")
 subpage("/contact/", "Contact", "Talk to us.", "Tell us what you're working on. A real person reads every note.",
         extra=f'\n        <a class="btn btn--primary" href="mailto:{MAIL}">Email {MAIL} <span aria-hidden="true">→</span></a>')
 for p, label in INDUSTRIES:
