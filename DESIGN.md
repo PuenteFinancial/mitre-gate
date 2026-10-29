@@ -71,10 +71,11 @@ Live on the homepage now:
   It scrolls sideways on phones.
 - **Promo banner** (`.promo__card`): dark blue rounded card with a gradient or image background,
   a serif headline on the left, and a blurb with a `.btn--light` on the right.
-- **Logo marquee** (`.logos`): a static label ("Experience working on diverse teams") with logos
-  scrolling in a loop (40s, pauses on hover, edges faded). Logos are grayscale at 65% opacity.
-  With reduced motion it becomes a static row.
-Further down the homepage:
+- **Logo marquee** (`.logos`): sits as the bottom row inside the promo card, under a hairline. A
+  static label ("Experience working on diverse teams") and logos scrolling in a loop (40s, pauses on
+  hover, edges faded). On the dark card the logos are white at 75%. Badge logos (`.logo--badge`)
+  invert to light tiles, and light-bodied badges (`.logo--light`) only lose their color. With
+  reduced motion it becomes a static row.
 
 - **Offering cards** (`.cards` / `.card`): three 4:5 cards with an animation background, a numbered
   glass chip top-left, and a glass panel bottom-left that reveals its text on hover. They become a

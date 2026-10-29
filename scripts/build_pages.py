@@ -160,7 +160,7 @@ for i, (tone, (href, industry)) in enumerate(zip(SLIDE_TONES, CAROUSEL), 1):
             </div>
           </div>""")
 
-LOGOS = [("smuckers.svg", "Smucker's", "logo--badge"), ("vivint.png", "Vivint", ""), ("savi.svg", "Savi", "logo--tall"),
+LOGOS = [("smuckers.svg", "Smucker's", "logo--badge logo--light"), ("vivint.png", "Vivint", ""), ("savi.svg", "Savi", "logo--tall"),
          ("boostly.svg", "Boostly", ""), ("goldman-sachs.svg", "Goldman Sachs", "logo--badge"),
          ("capital-one.svg", "Capital One", "logo--tall"), ("amazon.svg", "Amazon", ""), ("home-depot.svg", "The Home Depot", "logo--badge")]
 logos = "\n".join(f'              <img src="/assets/logos/{f}" alt="{a}"{f" class={chr(34)}{c}{chr(34)}" if c else ""} loading="lazy" />' for f, a, c in LOGOS)
@@ -221,16 +221,16 @@ HOME_MAIN = f"""
           <p>Mitre engineers embed within your business to find and rank where AI creates value, then architect and build the systems that capture it.</p>
           <a class="btn btn--light" href="/services/">Our services <span aria-hidden="true">→</span></a>
         </div>
-      </div>
-      <div class="logos">
-        <p class="logos__k">Experience working on diverse teams</p>
-        <div class="logos__mask">
-          <div class="logos__track">
-            <div class="logos__row">
-{logos}
-            </div>
-            <div class="logos__row" aria-hidden="true">
-{logos_dup}
+        <div class="logos">
+          <p class="logos__k">Experience working on diverse teams</p>
+          <div class="logos__mask">
+            <div class="logos__track">
+              <div class="logos__row">
+  {logos}
+              </div>
+              <div class="logos__row" aria-hidden="true">
+  {logos_dup}
+              </div>
             </div>
           </div>
         </div>
