@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="robots" content="noindex" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services | Mitre</title>
+  <link rel="canonical" href="https://mitregate.com/services/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Mitre" />
+  <meta property="og:title" content="Services | Mitre" />
+  <meta property="og:url" content="https://mitregate.com/services/" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&amp;family=Red+Hat+Mono:wght@500&amp;family=Spectral:wght@500&amp;display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/v2/site.css" />
+  <link rel="stylesheet" href="/v2/industry.css" />
+</head>
+<body>
+  <header class="cnav" id="nav">
+    <a class="cnav__brand" href="/"><img src="/public/brand/mitre-wordmark-blue.svg" alt="Mitre" width="101" height="24" /></a>
+    <nav class="cnav__links" aria-label="Primary">
+      <a href="/">Home</a>
+      <a href="/services/" aria-current="page">Services</a>
+      <a href="/financing/">Financing</a>
+      <div class="cnav__group">
+        <a class="cnav__parent" href="/industries/">Industries <span class="cnav__chev" aria-hidden="true">▾</span></a>
+        <div class="cnav__drop">
+          <ul class="cnav__panel" aria-label="Industries">
+          <li><a href="/logistics/">Logistics</a></li>
+          <li><a href="/supply-chain/">Supply chain</a></li>
+          <li><a href="/finance/">Finance</a></li>
+          <li><a href="/e-commerce/">E-commerce</a></li>
+          <li><a href="/consumer-goods/">Consumer goods</a></li>
+          </ul>
+        </div>
+      </div>
+      <a href="/careers/">Careers</a>
+    </nav>
+    <a class="btn btn--primary cnav__cta" href="/contact/">Contact <span aria-hidden="true">→</span></a>
+    <button class="cnav__menu" id="navMenu" aria-label="Menu" aria-expanded="false" aria-controls="mobileMenu">≡</button>
+  </header>
+  <div class="cmenu" id="mobileMenu" aria-hidden="true">
+    <a href="/">Home</a>
+    <a href="/services/" aria-current="page">Services</a>
+    <a href="/financing/">Financing</a>
+    <a href="/industries/">Industries</a>
+    <div class="cmenu__sub">
+      <a href="/logistics/">Logistics</a>
+      <a href="/supply-chain/">Supply chain</a>
+      <a href="/finance/">Finance</a>
+      <a href="/e-commerce/">E-commerce</a>
+      <a href="/consumer-goods/">Consumer goods</a>
+    </div>
+    <a href="/careers/">Careers</a>
+  </div>
+
+  <main id="page" class="ind">
+    <section class="ind__hero">
+      <div class="wrap">
+        <p class="ind__k">Services</p>
+        <h1>Services</h1>
+        <p class="ind__lede">What we build with you, and how we work. This page is on its way.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="cfoot">
+    <div class="cfoot__in">
+      <div>
+        <a class="cfoot__brand" href="/"><img src="/public/brand/mitre-wordmark-white.svg" alt="Mitre" width="101" height="24" /></a>
+      </div>
+      <nav class="cfoot__nav" aria-label="Footer">
+        <div><p class="cfoot__h">Company</p><a href="#" data-placeholder="link">Healthcare</a><a href="#" data-placeholder="link">Mitre for SMB</a><a href="/careers/">Careers</a></div>
+        <div><p class="cfoot__h">Resources</p><a href="#" data-placeholder="link">Tools</a><a href="#" data-placeholder="link">Articles</a><a href="#newsletter">Newsletter</a></div>
+        <div><p class="cfoot__h">Connect</p><a href="#" data-placeholder="link">LinkedIn</a><a href="mailto:info@mitregate.com">Email</a></div>
+      </nav>
+      <p class="cfoot__legal"><span>© 2026 Mitre Global. All rights reserved.</span></p>
+    </div>
+  </footer>
+  <script>
+    // Nav scroll state and mobile menu (the parts of the page script it uses)
+    (function () {
+      var nav = document.getElementById("nav");
+      var onScroll = function () { nav.classList.toggle("scrolled", window.scrollY > 24); };
+      onScroll();
+      window.addEventListener("scroll", onScroll, { passive: true });
+      var btn = document.getElementById("navMenu"), menu = document.getElementById("mobileMenu");
+      var setMenu = function (open) {
+        menu.classList.toggle("open", open);
+        btn.textContent = open ? "\u2715" : "\u2261";
+        btn.setAttribute("aria-expanded", String(open));
+        menu.setAttribute("aria-hidden", String(!open));
+      };
+      btn.addEventListener("click", function () { setMenu(!menu.classList.contains("open")); });
+      menu.querySelectorAll("a").forEach(function (a) { a.addEventListener("click", function () { setMenu(false); }); });
+      // Placeholder links go nowhere until their pages exist
+      document.querySelectorAll('a[data-placeholder="link"]').forEach(function (a) {
+        a.addEventListener("click", function (e) { e.preventDefault(); });
+      });
+    })();
+  </script>
+</body>
+</html>

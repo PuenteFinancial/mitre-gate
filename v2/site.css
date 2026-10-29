@@ -73,17 +73,32 @@ a:hover { text-decoration: underline; }
   background: var(--paper-raised); border-bottom: 1px solid var(--stone); }
 .cnav__brand { display: flex; align-items: center; padding: 4px 0; flex-shrink: 0; }
 .cnav__brand img { display: block; height: 24px; width: auto; }
-.cnav__links { display: flex; gap: 24px; margin-left: auto; }
+.cnav__links { display: flex; align-items: center; gap: 24px; margin-left: auto; }
 .cnav__links a { white-space: nowrap; padding: 4px 0; color: var(--ink-muted); font: 600 16px/24px var(--f-sans); }
 .cnav__links a:hover { color: var(--ocean); text-decoration: underline; }
 .cnav__links a[aria-current="page"] { color: var(--ink); }
+/* Industries: hovering or tabbing into the tab drops the five industry pages below the nav */
+.cnav__group { position: relative; }
+.cnav__links .cnav__parent.is-current { color: var(--ink); }
+.cnav__chev { display: inline-block; margin-left: 2px; font-size: 12px; transition: transform .2s var(--ease-out, ease); }
+.cnav__group:hover .cnav__chev, .cnav__group:focus-within .cnav__chev { transform: rotate(180deg); }
+/* the transparent top padding bridges the gap to the nav's bottom edge so the pointer can travel down */
+.cnav__drop { position: absolute; top: 100%; left: -16px; padding-top: 19px; opacity: 0; visibility: hidden; transform: translateY(-4px);
+  transition: opacity .15s ease, transform .15s ease, visibility .15s; }
+.cnav__group:hover .cnav__drop, .cnav__group:focus-within .cnav__drop { opacity: 1; visibility: visible; transform: none; }
+.cnav__panel { min-width: 220px; margin: 0; padding: 8px 0; list-style: none; background: var(--paper-raised); border: 1px solid var(--stone);
+  border-radius: var(--radius-md); box-shadow: 0 12px 32px color-mix(in srgb, var(--ink) 12%, transparent); }
+.cnav__links .cnav__panel a { display: block; padding: 8px 16px; color: var(--ink); }
+.cnav__links .cnav__panel a:hover { background: var(--ocean-tint); color: var(--ocean); text-decoration: none; }
+.cnav__links .cnav__panel a[aria-current="page"] { color: var(--ocean); }
+@media (prefers-reduced-motion: reduce) { .cnav__drop, .cnav__chev { transition: none; } }
 .cnav__cta { height: 40px; padding: 0 16px; }
 .cnav__menu { display: none; border: 1px solid var(--edge); background: transparent; color: var(--ink); border-radius: var(--radius-sm); width: 40px; height: 40px; font-size: 18px; line-height: 1; cursor: pointer; }
 
 /* mobile menu (opened by the page script, which toggles .open on #mobileMenu) */
 .cmenu { display: none; }
-/* collapses early: the six nav labels need ~1180px on one line */
-@media (max-width: 1180px) {
+/* the five tabs and Contact fit on one line down to ~900px */
+@media (max-width: 900px) {
   .cnav { gap: 12px; }
   .cnav__links { display: none; }
   .cnav__cta { margin-left: auto; }
@@ -93,7 +108,9 @@ a:hover { text-decoration: underline; }
   .cmenu.open { display: flex; }
   .cmenu a { padding: 12px 0; border-bottom: 1px solid var(--stone); color: var(--ink); font: 600 16px/24px var(--f-sans); }
   .cmenu a:last-child { border-bottom: 0; }
-  .cmenu a[aria-current="page"] { color: var(--ocean); }
+  .cmenu__sub { display: flex; flex-direction: column; }
+  .cmenu .cmenu__sub a { padding-left: var(--space-sm); font-weight: 400; color: var(--ink-muted); border-bottom: 1px solid var(--stone); }
+  .cmenu a[aria-current="page"], .cmenu .cmenu__sub a[aria-current="page"] { color: var(--ocean); }
 }
 @media (max-width: 400px) { .cnav__cta { padding: 0 12px; } }
 

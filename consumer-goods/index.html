@@ -26,22 +26,38 @@
     <a class="cnav__brand" href="/"><img src="/public/brand/mitre-wordmark-blue.svg" alt="Mitre" width="101" height="24" /></a>
     <nav class="cnav__links" aria-label="Primary">
       <a href="/">Home</a>
+      <a href="/services/">Services</a>
+      <a href="/financing/">Financing</a>
+      <div class="cnav__group">
+        <a class="cnav__parent is-current" href="/industries/">Industries <span class="cnav__chev" aria-hidden="true">▾</span></a>
+        <div class="cnav__drop">
+          <ul class="cnav__panel" aria-label="Industries">
+          <li><a href="/logistics/">Logistics</a></li>
+          <li><a href="/supply-chain/">Supply chain</a></li>
+          <li><a href="/finance/">Finance</a></li>
+          <li><a href="/e-commerce/">E-commerce</a></li>
+          <li><a href="/consumer-goods/" aria-current="page">Consumer goods</a></li>
+          </ul>
+        </div>
+      </div>
+      <a href="/careers/">Careers</a>
+    </nav>
+    <a class="btn btn--primary cnav__cta" href="/contact/">Contact <span aria-hidden="true">→</span></a>
+    <button class="cnav__menu" id="navMenu" aria-label="Menu" aria-expanded="false" aria-controls="mobileMenu">≡</button>
+  </header>
+  <div class="cmenu" id="mobileMenu" aria-hidden="true">
+    <a href="/">Home</a>
+    <a href="/services/">Services</a>
+    <a href="/financing/">Financing</a>
+    <a href="/industries/">Industries</a>
+    <div class="cmenu__sub">
       <a href="/logistics/">Logistics</a>
       <a href="/supply-chain/">Supply chain</a>
       <a href="/finance/">Finance</a>
       <a href="/e-commerce/">E-commerce</a>
       <a href="/consumer-goods/" aria-current="page">Consumer goods</a>
-    </nav>
-    <a class="btn btn--primary cnav__cta" href="mailto:info@mitregate.com">Get in touch</a>
-    <button class="cnav__menu" id="navMenu" aria-label="Menu" aria-expanded="false" aria-controls="mobileMenu">≡</button>
-  </header>
-  <div class="cmenu" id="mobileMenu" aria-hidden="true">
-    <a href="/">Home</a>
-    <a href="/logistics/">Logistics</a>
-    <a href="/supply-chain/">Supply chain</a>
-    <a href="/finance/">Finance</a>
-    <a href="/e-commerce/">E-commerce</a>
-    <a href="/consumer-goods/" aria-current="page">Consumer goods</a>
+    </div>
+    <a href="/careers/">Careers</a>
   </div>
 
   <main id="page" class="ind">
@@ -118,7 +134,7 @@
         <a class="cfoot__brand" href="/"><img src="/public/brand/mitre-wordmark-white.svg" alt="Mitre" width="101" height="24" /></a>
       </div>
       <nav class="cfoot__nav" aria-label="Footer">
-        <div><p class="cfoot__h">Company</p><a href="#" data-placeholder="link">Healthcare</a><a href="#" data-placeholder="link">Mitre for SMB</a><a href="#" data-placeholder="link">Careers</a></div>
+        <div><p class="cfoot__h">Company</p><a href="#" data-placeholder="link">Healthcare</a><a href="#" data-placeholder="link">Mitre for SMB</a><a href="/careers/">Careers</a></div>
         <div><p class="cfoot__h">Resources</p><a href="#" data-placeholder="link">Tools</a><a href="#" data-placeholder="link">Articles</a><a href="#newsletter">Newsletter</a></div>
         <div><p class="cfoot__h">Connect</p><a href="#" data-placeholder="link">LinkedIn</a><a href="mailto:info@mitregate.com">Email</a></div>
       </nav>
