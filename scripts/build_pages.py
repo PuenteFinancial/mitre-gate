@@ -338,7 +338,7 @@ subpage("/services/", "Services", "Services", "What we build with you, and how w
 subpage("/financing/", "Financing", "Financing", "How we make the work easy to fund. This page is on its way.")
 subpage("/industries/", "Industries", "Where we work.", "We embed with operators in six industries. Pick yours to see how we help.",
         extra="\n" + pills("Choose an industry"))
-subpage("/careers/", "Work with us", "Careers", "Open roles at Mitre.", title="Careers", banner_label="No open roles at this time.")
+subpage("/careers/", "Work with us", "Careers", "Explore roles at Mitre.", title="Careers", banner_label="No open roles at this time.")
 subpage("/contact/", "Contact", "Talk to us.", "Tell us what you're working on. A real person reads every note.",
         extra=f'\n        <a class="btn btn--primary" href="mailto:{MAIL}">Email {MAIL} <span aria-hidden="true">→</span></a>')
 for p, label in INDUSTRIES:
