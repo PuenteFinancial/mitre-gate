@@ -215,9 +215,9 @@ HOME_MAIN = f"""
     <section class="wrap promo" aria-labelledby="promo-title">
       <div class="promo__card">
         <div class="promo__bg" aria-hidden="true"></div>
-        <h2 id="promo-title">The leading AI department for your business.</h2>
+        <h2 id="promo-title">The leading AI department for global commerce.</h2>
         <div>
-          <p>Mitre engineers embed within your business to find and rank where AI creates value, then architect and build the systems that capture&nbsp;it.</p>
+          <p>Mitre engineers deploy alongside your organization to discover and rank where AI can create the largest measurable impact. We then architect and build the systems that realize&nbsp;it.</p>
           <a class="btn btn--light" href="/services/">Our services <span aria-hidden="true">→</span></a>
         </div>
         <div class="logos">
