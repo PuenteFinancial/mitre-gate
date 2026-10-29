@@ -96,7 +96,7 @@ def footer():
   <footer class="foot">
     <div class="wrap">
       <div class="foot__top">
-        <p class="foot__tag">Chart your course through AI transformation.</p>
+        <p class="foot__tag">Level up through AI transformation.</p>
         <nav class="foot__nav" aria-label="Footer">
 {nav}
         </nav>
