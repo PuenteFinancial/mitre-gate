@@ -195,14 +195,26 @@ a { color: var(--ocean); text-decoration: none; }
 .promo__card p { font: 400 17px/28px var(--f-sans); color: var(--blue-100); }
 .promo__card .btn { margin-top: 24px; }
 
-/* logo row */
-.logos { display: flex; align-items: center; gap: 24px 48px; margin-top: 48px; }
+/* logo row: the logos scroll past in a loop; the second copy makes the loop seamless */
+.logos { display: flex; align-items: center; gap: 24px 40px; margin-top: 48px; }
 .logos__k { flex: 0 0 auto; max-width: 15ch; font: 700 12px/18px var(--f-sans); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-muted); }
-.logos__row { flex: 1; display: flex; align-items: center; justify-content: space-between; gap: 24px 40px; flex-wrap: wrap; }
+.logos__mask { flex: 1; min-width: 0; overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent); mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent); }
+.logos__track { display: flex; width: max-content; animation: logos-scroll 40s linear infinite; }
+.logos__mask:hover .logos__track { animation-play-state: paused; }
+.logos__row { flex: none; display: flex; align-items: center; gap: 72px; padding-right: 72px; }
 .logos__row img { display: block; height: 26px; width: auto; filter: grayscale(1); opacity: .65; }
 .logos__row img.logo--badge { height: 42px; }
 .logos__row img.logo--tall { height: 34px; }
-@media (max-width: 860px) { .logos { flex-direction: column; align-items: flex-start; } .logos__k { max-width: none; } .logos__row { justify-content: flex-start; } }
+@keyframes logos-scroll { to { transform: translateX(-50%); } }
+@media (max-width: 860px) { .logos { flex-direction: column; align-items: stretch; } .logos__k { max-width: none; } .logos__row { gap: 48px; padding-right: 48px; } }
+/* without motion: one static, wrapping row */
+@media (prefers-reduced-motion: reduce) {
+  .logos__mask { -webkit-mask-image: none; mask-image: none; }
+  .logos__track { animation: none; width: auto; }
+  .logos__row { flex: 1; flex-wrap: wrap; gap: 24px 40px; padding-right: 0; }
+  .logos__row[aria-hidden] { display: none; }
+}
 
 /* ---------- section heads ---------- */
 .sec { padding: var(--section-y) 0; }
