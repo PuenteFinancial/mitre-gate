@@ -159,7 +159,9 @@ a { color: var(--ocean); text-decoration: none; }
 .slide__chip, .slide__card { opacity: 0; visibility: hidden; transform: translateY(6px); transition: none; }
 .slide.is-active .slide__chip, .slide.is-active .slide__card { opacity: 1; visibility: visible; transform: none;
   transition: opacity .35s .45s, transform .35s .45s var(--ease), visibility 0s .45s; }
-.slide__desc { font: 400 14px/20px var(--f-sans); color: var(--ink); }
+/* title stays one line so the card keeps its height */
+.slide__title { font: 700 15px/20px var(--f-sans); color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.slide__desc { margin-top: 2px; font: 400 14px/20px var(--f-sans); color: var(--ink-muted); }
 .slide__card .btn { margin-top: 10px; }
 .car__ctrl { display: flex; gap: 6px; margin-top: 18px; }
 .car__ctrl button { width: 30px; height: 30px; display: grid; place-items: center; border: 0; border-radius: 6px; background: var(--paper-raised); box-shadow: var(--shadow);
