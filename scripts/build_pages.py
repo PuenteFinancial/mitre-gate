@@ -256,10 +256,10 @@ HOME_MAIN = f"""
         <div>
           <p class="eyebrow">Trade Financing</p>
           <h2 class="h-section" id="feature-title">Payments and cash management that accelerate growth.</h2>
-          <p class="lede">AI stalls when every tool keeps its own copy of the data. We start by building your Manifest: one model of the records your business runs on, kept current from every system that holds them. Agents and applications read from it and act through approved steps.</p>
-          <a class="btn btn--primary" href="/services/">How we build <span aria-hidden="true">→</span></a>
+          <p class="lede">Growth stalls when cash is tied up in inventory and unpaid invoices. We help you fund purchases, pay suppliers on time and collect faster, with a clear view of your cash built into the systems you already run.</p>
+          <a class="btn btn--primary" href="/financing/">Explore Financing <span aria-hidden="true">→</span></a>
         </div>
-        {ph("anim", "Animation placeholder: the Manifest", "ph--g feature__vis")}
+        {ph("anim", "Animation placeholder: Trade Financing", "ph--g feature__vis")}
       </div>
     </section>
 
@@ -269,7 +269,7 @@ HOME_MAIN = f"""
         <div>
           <p class="eyebrow">Careers at Mitre</p>
           <h2 class="h-section" id="promise-title">Extreme ownership is the only qualification.</h2>
-          <p class="lede">We take no fees or kickbacks from model labs or software vendors. Everything we build stays yours, down to the code and the accounts it runs on.</p>
+          <p class="lede">We're a small team that embeds with operators and owns the result, not just the deliverable. If you take responsibility before anyone asks you to, you'll fit right in.</p>
           <a class="btn btn--primary" href="/careers/">Explore Careers <span aria-hidden="true">→</span></a>
         </div>
       </div>
