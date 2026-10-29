@@ -191,11 +191,11 @@ HOME_MAIN = f"""
 
     <section class="wrap promo" aria-labelledby="promo-title">
       <div class="promo__card">
-        {ph("photo", "Image or animation placeholder", "promo__bg")}
+        <div class="promo__bg" aria-hidden="true"></div>
         <h2 id="promo-title">The leading AI department for your business.</h2>
         <div>
-          <p>Our engineers embed inside your business to find and rank where AI creates value, then architect and build the systems that capture it. Every system is model-agnostic, and all of it is yours.</p>
-          <a class="btn btn--light" href="/services/">See our offering <span aria-hidden="true">→</span></a>
+          <p>Mitre engineers embed within your business to find and rank where AI creates value, then architect and build the systems that capture it.</p>
+          <a class="btn btn--light" href="/services/">Our services <span aria-hidden="true">→</span></a>
         </div>
       </div>
       <div class="logos">
