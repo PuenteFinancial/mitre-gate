@@ -338,7 +338,30 @@ subpage("/services/", "Services", "Services", "What we build with you, and how w
 subpage("/financing/", "Financing", "Financing", "How we make the work easy to fund. This page is on its way.")
 subpage("/industries/", "Industries", "Where we work.", "We embed with operators in six industries. Pick yours to see how we help.",
         extra="\n" + pills("Choose an industry"))
-subpage("/careers/", "Careers", "Careers", "Open roles at Mitre. This page is on its way.")
+CAREERS_MAIN = f"""
+  <main id="page">
+    <section class="phero">
+      <div class="wrap">
+        <p class="eyebrow">Careers at Mitre</p>
+        <h1 class="h-display">Extreme ownership is the only qualification.</h1>
+        <p class="lede">We're a small team that embeds with operators and owns the result, not just the deliverable.</p>
+      </div>
+    </section>
+    <section class="sec" style="padding-top:0" aria-labelledby="roles-title">
+      <div class="wrap">
+        <div class="roles">
+          <div class="roles__card">
+            <h2 class="roles__title" id="roles-title">Open roles</h2>
+            <p class="roles__none">No open roles right now.</p>
+            <p class="roles__txt">We're always glad to meet people who take responsibility before anyone asks. Tell us about yourself.</p>
+            <a class="btn btn--primary" href="mailto:{MAIL}?subject=Careers%20at%20Mitre">Introduce yourself <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+"""
+write("/careers/", head("/careers/", "Careers | Mitre", "", False) + header("/careers/") + CAREERS_MAIN + footer())
 subpage("/contact/", "Contact", "Talk to us.", "Tell us what you're working on. A real person reads every note.",
         extra=f'\n        <a class="btn btn--primary" href="mailto:{MAIL}">Email {MAIL} <span aria-hidden="true">→</span></a>')
 for p, label in INDUSTRIES:

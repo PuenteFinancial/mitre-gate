@@ -101,6 +101,11 @@ Removed 2026-10-29: the careers band (`.careers`), markup and CSS in `git show a
 Also styled but not on any page: **duo cards** (`.duo`), two tall image cards with a dark gradient, a serif headline and a light button. Removed from
 the homepage 2026-10-29; markup in `git show b91eac5:index.html`.
 
+The careers page (`/careers/`) is finished, not a placeholder: `.phero` hero, then an **open-roles
+panel** (`.roles`): a rounded band with the blue/green ring pattern and a centered cream card
+(`.roles__card`) with the "Open roles" title, a ruled status line (`.roles__none`), a short line and
+a mailto button. When roles exist, list them inside the card in place of the status line.
+
 Placeholder subpages use `.phero` (centered eyebrow, display title and lede) plus a wide
 `.phero__ph` placeholder block.
 

@@ -340,6 +340,15 @@ a { color: var(--ocean); text-decoration: none; }
 .phero .btn { margin-top: 28px; }
 .phero__ph { margin-top: 56px; aspect-ratio: 21 / 8; border-radius: var(--radius-lg); }
 
+/* ---------- careers page: open roles panel ---------- */
+.roles { display: grid; place-items: center; margin-top: 56px; padding: clamp(40px, 7vw, 96px) var(--gutter); border-radius: var(--radius-lg);
+  background: repeating-radial-gradient(circle at 15% 120%, var(--blue-100) 0 28px, var(--blue-50) 28px 56px, var(--green-100) 56px 84px); }
+.roles__card { width: min(100%, 560px); padding: clamp(28px, 4vw, 48px); background: var(--paper-raised); border-radius: var(--radius-md); box-shadow: var(--shadow); text-align: center; }
+.roles__title { font: 500 clamp(26px, 2.6vw, 34px)/1.2 var(--f-display); color: var(--blue-800); }
+.roles__none { margin-top: 18px; padding: 14px 0; border-block: 1px solid var(--stone); font: 600 16px/24px var(--f-sans); color: var(--ink); }
+.roles__txt { margin: 18px auto 0; max-width: 36ch; color: var(--ink-muted); }
+.roles .btn { margin-top: 24px; }
+
 /* ---------- responsive ---------- */
 @media (max-width: 860px) {
   .promo__card, .feature__in, .split, .foot__top { grid-template-columns: minmax(0, 1fr); }
