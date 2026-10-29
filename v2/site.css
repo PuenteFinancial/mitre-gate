@@ -107,7 +107,7 @@ a { color: var(--ocean); text-decoration: none; }
 .island--cta:hover { background: var(--blue-800); }
 .island__menu { display: none; width: 40px; height: 40px; margin-right: 4px; border: 0; border-radius: var(--radius-sm); background: var(--paper); color: var(--ink); font-size: 18px; line-height: 1; cursor: pointer; }
 
-/* Industries: hovering or tabbing into the tab drops the five industry pages below the island */
+/* Industries: hovering or tabbing into the tab drops the industry pages below the island */
 .island__group { position: relative; }
 .island__chev { display: inline-block; margin-left: 4px; font-size: 11px; transition: transform .2s var(--ease); }
 .island__group:hover .island__chev, .island__group:focus-within .island__chev { transform: rotate(180deg); }
@@ -181,7 +181,7 @@ a { color: var(--ocean); text-decoration: none; }
 }
 
 /* ---------- dark blue promo banner ---------- */
-.promo { margin-top: 72px; }
+.promo { margin-top: 72px; padding-bottom: var(--section-y); }
 .promo__card { position: relative; overflow: hidden; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 32px 56px; align-items: center;
   min-height: 320px; padding: clamp(28px, 4vw, 56px); border-radius: var(--radius-lg); background: var(--blue-800); color: var(--paper); }
 .promo__bg { position: absolute; inset: 0; color: var(--paper); background:
@@ -214,6 +214,11 @@ a { color: var(--ocean); text-decoration: none; }
   .logos__row[aria-hidden] { display: none; }
 }
 
+/* ============================================================
+   Section kit. Not on any page right now (removed from the homepage
+   2026-10-29) but kept as the house components for new sections.
+   Markup for each lives in git history and is described in DESIGN.md.
+   ============================================================ */
 /* ---------- section heads ---------- */
 .sec { padding: var(--section-y) 0; }
 .sec__head { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px 48px; flex-wrap: wrap; }
