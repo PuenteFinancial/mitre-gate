@@ -26,6 +26,23 @@
     a.addEventListener("click", function (e) { e.preventDefault(); });
   });
 
+  // Contact form: validates on the page but sends nothing until a backend is hooked up
+  document.querySelectorAll('form[data-placeholder="form"]').forEach(function (f) {
+    var status = f.querySelector(".form__status");
+    f.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var bad = null;
+      f.querySelectorAll(".field__input").forEach(function (el) {
+        var ok = el.checkValidity() && el.value.trim() !== "";
+        el.setAttribute("aria-invalid", String(!ok));
+        if (!ok && !bad) bad = el;
+      });
+      if (bad) { status.textContent = "Please fill in every field with a valid email."; bad.focus(); return; }
+      status.textContent = "This form isn't connected yet. Please email info@mitregate.com for now.";
+    });
+    f.addEventListener("input", function (e) { if (e.target.getAttribute("aria-invalid") === "true" && e.target.checkValidity() && e.target.value.trim()) e.target.setAttribute("aria-invalid", "false"); });
+  });
+
   // ---------- carousel ----------
   // Every slide sits at the stage's center and is shifted by its distance from the active one.
   // The active photo is full size; neighbors step down small, medium, then full again at the edges.

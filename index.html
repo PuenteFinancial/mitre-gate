@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&amp;family=Red+Hat+Mono:wght@500&amp;family=Spectral:wght@500&amp;display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/v2/site.css?v=1e6861e2" />
+  <link rel="stylesheet" href="/v2/site.css?v=2fb8877a" />
 </head>
 <body>
   <header class="hdr" id="nav">
@@ -262,30 +262,30 @@
       </div>
     </section>
 
-    <section class="careers" aria-labelledby="careers-title">
-      <div class="careers__txt">
-        <p class="eyebrow">Careers at Mitre</p>
-        <h2 class="h-section" id="careers-title">Build AI that businesses actually run on.</h2>
-        <p class="lede">We're a small team of engineers who embed with operators and ship. If that sounds like your kind of work, we'd like to hear from you.</p>
-        <div class="careers__btns">
-          <a class="btn btn--outline" href="/careers/">Explore careers</a>
-          <a class="btn btn--primary" href="/careers/">See open roles <span aria-hidden="true">→</span></a>
-        </div>
-      </div>
-      <div class="careers__art">
-        <div class="careers__frame"><div class="ph ph--photo ph--g" role="img" aria-label="Team photo placeholder"><span class="ph__label">Team photo placeholder</span></div></div>
-      </div>
-    </section>
-
     <section class="reach" id="contact" aria-labelledby="reach-title">
       <div class="wrap reach__in">
-        <p class="eyebrow">Contact us</p>
-        <h2 class="h-section" id="reach-title">Ready to put AI to work?</h2>
-        <p class="lede">Tell us what you're working on. A real person reads every note.</p>
-        <div class="reach__btns">
-          <a class="btn btn--light" href="/contact/">Contact us <span aria-hidden="true">→</span></a>
-          <a class="reach__mail" href="mailto:info@mitregate.com">info@mitregate.com</a>
+        <div class="reach__txt">
+          <p class="eyebrow">Contact us</p>
+          <h2 class="h-section" id="reach-title">Ready to put AI to work?</h2>
+          <p class="lede">Tell us what you're working on. A real person reads every note.</p>
+          <p class="reach__alt">Prefer email? <a class="reach__mail" href="mailto:info@mitregate.com">info@mitregate.com</a></p>
         </div>
+        <form class="form" data-placeholder="form" novalidate>
+          <div class="form__row">
+            <label class="field"><span class="field__label">Name</span>
+              <input class="field__input" name="name" autocomplete="name" required></label>
+            <label class="field"><span class="field__label">Company</span>
+              <input class="field__input" name="company" autocomplete="organization" required></label>
+          </div>
+          <label class="field"><span class="field__label">Work email</span>
+            <input class="field__input" type="email" name="email" autocomplete="email" required></label>
+          <label class="field"><span class="field__label">How can we help?</span>
+            <textarea class="field__input field__input--area" name="message" rows="5" required></textarea></label>
+          <div class="form__foot">
+            <button class="btn btn--primary" type="submit">Send <span aria-hidden="true">→</span></button>
+            <p class="form__status" role="status" aria-live="polite"></p>
+          </div>
+        </form>
       </div>
     </section>
   </main>
@@ -315,6 +315,6 @@
       </div>
     </div>
   </footer>
-  <script src="/v2/site.js?v=f32b5566"></script>
+  <script src="/v2/site.js?v=1ac54a57"></script>
 </body>
 </html>

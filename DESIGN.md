@@ -29,6 +29,7 @@ All colors are tokens in `:root` in `v2/site.css`. Never write a hex value anywh
 | Deep blue | `--blue-800` `#002442` | Headings, dark bands (promo, newsletter) |
 | Accent | `--forest` (`--green-600`) | Eyebrows, small labels |
 | Tints | `--blue-50/100`, `--green-50/100/200` | Section washes, hover fills, glass |
+| Error | `--error` / `--error-tint` | Invalid form fields only |
 
 **Blue leads, green accents.** Green appears in eyebrows, the light green feature panel
 (`--green-50`), and buttons that sit on dark blue (`.btn--light`, `--green-200`). Never make a
@@ -83,14 +84,19 @@ Live on the homepage now:
 - **Feature panel** (`.feature`): full-width `--green-50` band, text and button on the left, a large
   rounded visual on the right.
 - **Split** (`.split`): a wide photo on the left, eyebrow, headline, lede and button on the right.
-- **Careers band** (`.careers`): `--blue-50` half with text and two buttons, and a patterned half
-  with a framed photo.
-- **Contact band** (`.reach`): full-width dark blue band, centered eyebrow, headline and lede, with a
-  `.btn--light` Contact us button next to the email link.
+- **Contact band** (`.reach`): full-width dark blue band. Eyebrow, headline, lede and a "Prefer
+  email?" link on the left; a contact form card on the right (stacks under 860px).
+- **Form** (`.form`, `.field`, `.field__label`, `.field__input`): cream `--paper-raised` card,
+  uppercase 12px labels in `--blue-800`, 46px inputs on `--paper` with a `--blue-200` border and a
+  blue focus ring. Invalid fields get `aria-invalid="true"` and the `--error` border. Status text
+  goes in `.form__status` (`role="status"`). A form with `data-placeholder="form"` validates but
+  sends nothing and says so; it is waiting for a backend.
 
 - **Footer** (`.foot`): light, with a serif tagline ("Level up through AI transformation."), a
   two-column nav, and a "How can we help?" block with a Contact button. The bottom row holds the
   logo, © and email.
+
+Removed 2026-10-29: the careers band (`.careers`), markup and CSS in `git show aaa5f82`.
 
 Also styled but not on any page: **duo cards** (`.duo`), two tall image cards with a dark gradient, a serif headline and a light button. Removed from
 the homepage 2026-10-29; markup in `git show b91eac5:index.html`.
