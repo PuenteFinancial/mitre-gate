@@ -133,17 +133,9 @@ def pills(label="Industries"):
       </nav>"""
 
 
-def reach(eyebrow, h2, lede):
-    """Dark blue contact band with the contact form. One source for every page that ends with it."""
-    return f"""    <section class="reach" id="contact" aria-labelledby="reach-title">
-      <div class="wrap reach__in">
-        <div class="reach__txt">
-          <p class="eyebrow">{eyebrow}</p>
-          <h2 class="h-section" id="reach-title">{h2}</h2>
-          <p class="lede">{lede}</p>
-          <p class="reach__alt">Prefer email? <a class="reach__mail" href="mailto:{MAIL}">{MAIL}</a></p>
-        </div>
-        <form class="form" data-placeholder="form" novalidate>
+def contact_form():
+    """The contact form (name, company, work email, message). Validates on the page; no backend yet."""
+    return """        <form class="form" data-placeholder="form" novalidate>
           <div class="form__row">
             <label class="field"><span class="field__label">Name</span>
               <input class="field__input" name="name" autocomplete="name" required></label>
@@ -158,7 +150,20 @@ def reach(eyebrow, h2, lede):
             <button class="btn btn--primary" type="submit">Send <span aria-hidden="true">→</span></button>
             <p class="form__status" role="status" aria-live="polite"></p>
           </div>
-        </form>
+        </form>"""
+
+
+def reach(eyebrow, h2, lede):
+    """Dark blue contact band with the contact form. One source for every page that ends with it."""
+    return f"""    <section class="reach" id="contact" aria-labelledby="reach-title">
+      <div class="wrap reach__in">
+        <div class="reach__txt">
+          <p class="eyebrow">{eyebrow}</p>
+          <h2 class="h-section" id="reach-title">{h2}</h2>
+          <p class="lede">{lede}</p>
+          <p class="reach__alt">Prefer email? <a class="reach__mail" href="mailto:{MAIL}">{MAIL}</a></p>
+        </div>
+{contact_form()}
       </div>
     </section>"""
 
@@ -562,8 +567,33 @@ write("/financing/", head("/financing/", "Financing | Mitre", "", True) + header
 subpage("/industries/", "Industries", "Where we work.", "We embed with operators in six industries. Pick yours to see how we help.",
         extra="\n" + pills("Choose an industry"))
 subpage("/careers/", "Work with us", "Careers", "Explore roles at Mitre.", title="Careers", banner_label="No open roles at this time.")
-subpage("/contact/", "Contact", "Talk to us.", "Tell us what you're working on. A real person reads every note.",
-        extra=f'\n        <a class="btn btn--primary" href="mailto:{MAIL}">Email {MAIL} <span aria-hidden="true">→</span></a>')
+CONTACT_MAIN = f"""
+  <main id="page">
+    <section class="phero" aria-labelledby="contact-title">
+      <div class="wrap">
+        <p class="eyebrow">Contact</p>
+        <h1 class="h-display" id="contact-title">Talk to us.</h1>
+        <p class="lede">Tell us what you're working on. A real person reads every note.</p>
+      </div>
+    </section>
+    <section class="sec contact-sec" aria-label="Contact form">
+      <div class="wrap contact">
+        <aside class="contact__panel">
+          <div class="promo__bg" aria-hidden="true"></div>
+          <p class="eyebrow">Get started</p>
+          <h2 class="contact__title">Most engagements start with an assessment.</h2>
+          <p class="contact__txt">Share a little about your business and where you want to go. We'll follow up to set up a first conversation.</p>
+          <div class="contact__mail">
+            <span>Prefer email?</span>
+            <a href="mailto:{MAIL}">{MAIL}</a>
+          </div>
+        </aside>
+{contact_form()}
+      </div>
+    </section>
+  </main>
+"""
+write("/contact/", head("/contact/", "Contact | Mitre", "", True) + header("/contact/") + CONTACT_MAIN + footer())
 for p, label in INDUSTRIES:
     subpage(p, "Industries", label, f"How Mitre puts AI to work for {label}. This page is on its way.", title=label.replace("&amp;", "&"))
 print("ok")

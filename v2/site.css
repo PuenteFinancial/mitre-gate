@@ -445,6 +445,22 @@ a { color: var(--ocean); text-decoration: none; }
 .phero--photo .badge { background: var(--paper-raised); color: var(--blue-800); }
 .phero--photo .badge__dot, .phero--photo .badge__dot::after { background: var(--green-400); }
 
+/* ---------- contact page: dark blue info panel beside the form ---------- */
+.contact-sec { padding-top: 56px; }
+.contact { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr); gap: 16px; align-items: stretch; }
+.contact__panel { position: relative; overflow: hidden; isolation: isolate; display: flex; flex-direction: column; padding: clamp(28px, 3.4vw, 48px);
+  border-radius: var(--radius-lg); background: var(--blue-800); color: var(--paper); }
+.contact__panel .promo__bg { z-index: -1; }
+.contact__panel .eyebrow { color: var(--green-200); }
+.contact__title { margin-top: 14px; font: 500 clamp(26px, 2.6vw, 34px)/1.15 var(--f-display); letter-spacing: -.01em; color: var(--paper-raised); }
+.contact__txt { margin-top: 14px; font: 400 16px/26px var(--f-sans); color: var(--blue-100); }
+.contact__mail { display: grid; gap: 4px; margin-top: auto; padding-top: 32px; }
+.contact__mail span { font: 700 11px/16px var(--f-sans); letter-spacing: .1em; text-transform: uppercase; color: var(--blue-200); }
+.contact__mail a { width: fit-content; font: 600 17px/26px var(--f-sans); color: var(--paper-raised); text-decoration: underline; text-underline-offset: 5px; text-decoration-color: var(--blue-400); }
+.contact__mail a:hover { text-decoration-color: currentColor; }
+.contact__panel :focus-visible { outline-color: var(--paper); }
+@media (max-width: 860px) { .contact { grid-template-columns: minmax(0, 1fr); } .contact__mail { margin-top: 0; } }
+
 /* ---------- financing page (coming soon) ---------- */
 .phero .eyebrow--row { justify-content: center; }
 .fin__k { font: 700 12px/16px var(--f-sans); letter-spacing: .12em; text-transform: uppercase; color: var(--forest); text-align: center; }

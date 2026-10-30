@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&amp;family=Red+Hat+Mono:wght@500&amp;family=Spectral:wght@500&amp;display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/v2/site.css?v=704d2358" />
+  <link rel="stylesheet" href="/v2/site.css?v=35cb343b" />
 </head>
 <body>
   <header class="hdr" id="nav">
@@ -66,16 +66,42 @@
   </nav>
 
   <main id="page">
-    <section class="phero">
+    <section class="phero" aria-labelledby="contact-title">
       <div class="wrap">
         <p class="eyebrow">Contact</p>
-        <h1 class="h-display">Talk to us.</h1>
+        <h1 class="h-display" id="contact-title">Talk to us.</h1>
         <p class="lede">Tell us what you're working on. A real person reads every note.</p>
-        <a class="btn btn--primary" href="mailto:info@mitregate.com">Email info@mitregate.com <span aria-hidden="true">→</span></a>
       </div>
     </section>
-    <section class="sec" style="padding-top:0">
-      <div class="wrap"><div class="ph ph--anim phero__ph" role="img" aria-label="Page content coming soon"><span class="ph__label">Page content coming soon</span></div></div>
+    <section class="sec contact-sec" aria-label="Contact form">
+      <div class="wrap contact">
+        <aside class="contact__panel">
+          <div class="promo__bg" aria-hidden="true"></div>
+          <p class="eyebrow">Get started</p>
+          <h2 class="contact__title">Most engagements start with an assessment.</h2>
+          <p class="contact__txt">Share a little about your business and where you want to go. We'll follow up to set up a first conversation.</p>
+          <div class="contact__mail">
+            <span>Prefer email?</span>
+            <a href="mailto:info@mitregate.com">info@mitregate.com</a>
+          </div>
+        </aside>
+        <form class="form" data-placeholder="form" novalidate>
+          <div class="form__row">
+            <label class="field"><span class="field__label">Name</span>
+              <input class="field__input" name="name" autocomplete="name" required></label>
+            <label class="field"><span class="field__label">Company</span>
+              <input class="field__input" name="company" autocomplete="organization" required></label>
+          </div>
+          <label class="field"><span class="field__label">Work email</span>
+            <input class="field__input" type="email" name="email" autocomplete="email" required></label>
+          <label class="field"><span class="field__label">How can we help?</span>
+            <textarea class="field__input field__input--area" name="message" rows="5" required></textarea></label>
+          <div class="form__foot">
+            <button class="btn btn--primary" type="submit">Send <span aria-hidden="true">→</span></button>
+            <p class="form__status" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+      </div>
     </section>
   </main>
 
