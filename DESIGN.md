@@ -92,6 +92,9 @@ Live on the homepage now:
   goes in `.form__status` (`role="status"`). A form with `data-placeholder="form"` validates but
   sends nothing and says so; it is waiting for a backend.
 
+- **Badge** (`.badge`): small dark-blue pill with a pulsing green dot (`.badge__dot`), placed beside an
+  eyebrow wrapped in `.eyebrow--row`. For status callouts like "Coming soon". The pulse stops with reduced motion.
+
 - **Footer** (`.foot`): light, with a serif tagline ("Level up through AI transformation."), a
   two-column nav, and a "How can we help?" block with a Contact button. The bottom row holds the
   logo, © and email.
