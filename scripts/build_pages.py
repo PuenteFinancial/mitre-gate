@@ -168,6 +168,51 @@ def reach(eyebrow, h2, lede):
     </section>"""
 
 
+def home_reach():
+    """The homepage "Ready to engage with Mitre?" band. Also closes every industry page."""
+    return reach("Contact us", "Ready to engage with Mitre?", "Tell us what you're working on. A real person reads every note.")
+
+
+# ---------------- industry copy ----------------
+# Each industry supplies only its lead line, paragraph and five "Where we help" tags; the rest is shared.
+IND_COPY = {
+    "/consumer-goods/": (
+        "More time on the brand, less on the back office.",
+        "Consumer brands win on product, demand and margin. Behind that sits a heavy operational load: forecasting demand, managing inventory across channels, coordinating overseas suppliers and production runs, tracking landed costs, and reconciling sales from every marketplace and retailer. Mitre embeds with your team to take that work off your operators' plates, sharpen forecasting and inventory decisions, and give leadership a clear, current view of margin by product and channel.",
+        ["Demand &amp; inventory planning", "Supplier &amp; production coordination", "Margin by product &amp; channel", "Landed cost tracking", "Marketplace &amp; retail reconciliation"]),
+    "/wholesale-distribution/": (
+        "Thin margins reward fast, accurate operations.",
+        "Distributors win on volume at thin margins. Value comes from buying right, keeping the right stock in the right place, quoting and fulfilling orders quickly, and collecting on time. Much of that still runs on email, spreadsheets and manual order entry. Mitre works alongside your team to automate order intake and quoting, improve purchasing and replenishment decisions, and shorten the path from order to cash, so your people spend their time on customers and suppliers.",
+        ["Order intake &amp; quoting", "Purchasing &amp; replenishment", "Order to cash", "Inventory placement", "Pricing &amp; margin"]),
+    "/logistics/": (
+        "Move more freight with the team you have.",
+        "For 3PLs, freight forwarders and warehouse operators, every shipment generates documents, updates and exceptions. Quoting, booking, customs paperwork, tracking, billing and customer communication absorb hours that should go to growing accounts. Mitre embeds with your operations team to automate document handling and status updates, catch exceptions before your customers do, and tighten billing so accessorials don't slip through, letting you scale volume without scaling headcount.",
+        ["Quoting &amp; booking", "Documents &amp; exceptions", "Billing &amp; customer updates", "Shipment tracking", "Customs paperwork"]),
+    "/supply-chain/": (
+        "See the whole chain, from supplier to shipment.",
+        "Sourcing teams, manufacturers, and supply chain consultants and brokers create value by finding the right suppliers, negotiating cost, keeping production on schedule and managing risk across borders. That work depends on information scattered across supplier emails, purchase orders, quality reports and spreadsheets. Mitre works with your team to unify that data, automate supplier communication and PO tracking, and surface cost, lead time and risk signals early, so decisions are made with the full picture.",
+        ["Supplier sourcing &amp; management", "PO &amp; production tracking", "Cost &amp; risk visibility", "Supplier communication", "Quality reporting"]),
+    "/specialty-finance/": (
+        "Underwrite faster. Monitor smarter.",
+        "For factors, PO financiers and small business lenders, returns come down to how quickly and accurately you evaluate a deal, verify what stands behind it, and watch the book once it funds. Much of that still means collecting documents, spreading financials, verifying invoices and chasing collections by hand. Mitre embeds with your team to automate intake and verification, give underwriters richer data to decide on, and flag portfolio risk early, so you grow volume without adding risk or headcount.",
+        ["Intake &amp; underwriting", "Invoice &amp; collateral verification", "Portfolio monitoring &amp; collections", "Document collection", "Financial spreading"]),
+    "/smb/": (
+        "Big-company capability, sized for your business.",
+        "Small operators run every function with a lean team, and sales, operations, finance and customer service often sit with the same few people. Hours lost to manual work and disconnected tools come straight out of growth. Mitre works with owners and their teams to find where AI frees up the most time and money, then builds simple systems around how you already work, so you can stay focused on customers and the business itself.",
+        ["Operations &amp; admin", "Finance &amp; reporting", "Customer communication", "Sales &amp; lead follow-up", "Tool consolidation"]),
+}
+
+# Homepage carousel: a short goal per industry; the card previews the start of that industry's paragraph
+SLIDE_TITLE = {
+    "/consumer-goods/": "Focus on your product",
+    "/wholesale-distribution/": "Win on every order",
+    "/logistics/": "Streamline your operation",
+    "/supply-chain/": "Act with more insight",
+    "/specialty-finance/": "Grow your book of business",
+    "/smb/": "Do more with less",
+}
+
+
 # ---------------- homepage ----------------
 SLIDE_TONES = ["", "ph--g", "ph--dark", "ph--mix", "", "ph--g"]
 slides = []
@@ -189,9 +234,9 @@ for i, (tone, (href, industry)) in enumerate(zip(SLIDE_TONES, CAROUSEL), 1):
             <div class="slide__media">{img}</div>
             <span class="slide__chip">{industry}</span>
             <div class="slide__card">
-              <h2 class="slide__title">Title placeholder</h2>
-              <p class="slide__desc">Short description placeholder for this industry.</p>
-              <a class="btn btn--primary btn--sm" href="#" data-placeholder="link">Learn more <span aria-hidden="true">→</span></a>
+              <h2 class="slide__title">{SLIDE_TITLE[href]}</h2>
+              <p class="slide__desc">{IND_COPY[href][1]}</p>
+              <a class="btn btn--primary btn--sm" href="{href}">Learn more <span aria-hidden="true">→</span></a>
             </div>
           </div>""")
 
@@ -224,6 +269,26 @@ cards = "\n".join(f"""        <article class="card">
             </div></div>
           </div>
         </article>""" for n, chip, title, body, anim in OFFER)
+
+def offering(industry=None):
+    """The "Assess, build, prove." section. One source for the homepage and every industry page;
+    on an industry page the services link names that industry."""
+    more = f"See our full service for {industry}" if industry else "See our full service"
+    return f"""    <section class="sec" id="offering" aria-labelledby="offer-title">
+      <div class="wrap">
+        <div class="sec__head">
+          <div>
+            <h2 class="h-section" id="offer-title">Assess, build, prove.</h2>
+            <p class="lede">We find where AI pays off in your business, build the data pipelines and systems to capture it, and measure every result against agreed outcomes.</p>
+          </div>
+          <a class="more" href="/services/">{more}</a>
+        </div>
+        <div class="cards">
+{cards}
+        </div>
+      </div>
+    </section>"""
+
 
 HOME_MAIN = f"""
   <main id="page">
@@ -271,20 +336,7 @@ HOME_MAIN = f"""
       </div>
     </section>
 
-    <section class="sec" id="offering" aria-labelledby="offer-title">
-      <div class="wrap">
-        <div class="sec__head">
-          <div>
-            <h2 class="h-section" id="offer-title">Assess, build, prove.</h2>
-            <p class="lede">We find where AI pays off in your business, build the data pipelines and systems to capture it, and measure every result against agreed outcomes.</p>
-          </div>
-          <a class="more" href="/services/">See our full service</a>
-        </div>
-        <div class="cards">
-{cards}
-        </div>
-      </div>
-    </section>
+{offering()}
 
     <section class="feature" aria-labelledby="feature-title">
       <div class="wrap feature__in">
@@ -310,7 +362,7 @@ HOME_MAIN = f"""
       </div>
     </section>
 
-{reach("Contact us", "Ready to engage with Mitre?", "Tell us what you're working on. A real person reads every note.")}
+{home_reach()}
   </main>
 """
 
@@ -511,6 +563,11 @@ write("/services/", head("/services/", "Services | Mitre", SERVICES_DESC, False)
 
 # ---------------- placeholder subpages ----------------
 def subpage(path, eyebrow, h1, lede, extra="", banner=True, title=None, banner_label="Page content coming soon", pre="", hero_cls=""):
+    body = ""
+    if banner or pre:
+        body = f"""    <section class="sec" style="padding-top:0">
+      <div class="wrap">{pre}{ph("anim", banner_label, "phero__ph") if banner else ""}</div>
+    </section>"""
     main = f"""
   <main id="page">
     <section class="phero{(" " + hero_cls) if hero_cls else ""}">
@@ -520,9 +577,7 @@ def subpage(path, eyebrow, h1, lede, extra="", banner=True, title=None, banner_l
         <p class="lede">{lede}</p>{extra}
       </div>
     </section>
-    <section class="sec" style="padding-top:0">
-      <div class="wrap">{pre}{ph("anim", banner_label, "phero__ph") if banner else ""}</div>
-    </section>
+{body}
   </main>
 """
     title = f"{title or eyebrow} | Mitre"
@@ -564,8 +619,8 @@ FINANCING_MAIN = f"""
   </main>
 """
 write("/financing/", head("/financing/", "Financing | Mitre", "", True) + header("/financing/") + FINANCING_MAIN + footer())
-subpage("/industries/", "Industries", "Where we work.", "We embed across all of global commerce. Select your industry to see how we help.",
-        extra="\n" + pills("Choose an industry"))
+subpage("/industries/", "Industries", "See the impact Mitre can have in your industry.", "Select your industry to learn more.",
+        extra="\n" + pills("Choose an industry"), banner=False, hero_cls="phero--end")
 def select(name, label, options, extra=""):
     opts = "".join(f'<option value="{v}">{t}</option>' for v, t in options)
     return f'            <span class="filter__select{extra}"><select name="{name}" aria-label="{label}">{opts}</select></span>'
@@ -615,6 +670,43 @@ CONTACT_MAIN = f"""
   </main>
 """
 write("/contact/", head("/contact/", "Contact | Mitre", "", True) + header("/contact/") + CONTACT_MAIN + footer())
+# ---------------- industry pages ----------------
+
+
+def industry_page(path, name):
+    lead, para, helps = IND_COPY[path]
+    chips = "".join(f"<li>{t}</li>" for t in helps)
+    main = f"""
+  <main id="page">
+    <section class="phero" aria-labelledby="ind-title">
+      <div class="wrap">
+        <p class="eyebrow">Industries</p>
+        <h1 class="h-display" id="ind-title">{name}</h1>
+        <p class="lede">{lead}</p>
+      </div>
+    </section>
+    <section class="sec ind" aria-label="About {name}">
+      <div class="wrap">
+        <div class="ind__panel">
+          <div class="promo__bg" aria-hidden="true"></div>
+          <p class="ind__body">{para}</p>
+          <div class="ind__help">
+            <p class="phase__label">Where we help</p>
+            <ul class="tags">{chips}</ul>
+          </div>
+        </div>
+        <p class="ind__cta"><a class="btn btn--primary" href="/services/">Our service <span aria-hidden="true">→</span></a></p>
+      </div>
+    </section>
+
+{offering(name)}
+
+{home_reach()}
+  </main>
+"""
+    write(path, head(path, f"{name.replace('&amp;', '&')} | Mitre", "", True) + header(path) + main + footer())
+
+
 for p, label in INDUSTRIES:
-    subpage(p, "Industries", label, f"How Mitre puts AI to work for {label}. This page is on its way.", title=label.replace("&amp;", "&"))
+    industry_page(p, label)
 print("ok")
