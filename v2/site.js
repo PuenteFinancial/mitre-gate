@@ -99,6 +99,44 @@
     setMode();
   });
 
+  // ---------- careers: filter and sort open roles ----------
+  // Roles are <li data-job data-team data-location data-type data-date data-title> inside [data-jobs].
+  // With no roles posted, the count reads 0 and the empty banner stays visible.
+  document.querySelectorAll("[data-jobfilter]").forEach(function (form) {
+    var list = document.querySelector("[data-jobs]");
+    var count = form.querySelector("[data-job-count]");
+    var empty = form.parentNode.querySelector(".phero__ph");
+    var emptyLabel = empty && empty.querySelector(".ph__label");
+    var baseLabel = emptyLabel ? emptyLabel.textContent : "";
+    function apply() {
+      var jobs = [].slice.call(list.querySelectorAll("[data-job]"));
+      var q = form.q.value.trim().toLowerCase();
+      var shown = 0;
+      jobs.forEach(function (li) {
+        var ok = (!q || li.textContent.toLowerCase().indexOf(q) !== -1) &&
+          ["team", "location", "type"].every(function (k) { return !form[k].value || li.dataset[k] === form[k].value; });
+        li.hidden = !ok;
+        if (ok) shown++;
+      });
+      jobs.sort(function (a, b) {
+        return form.sort.value === "title"
+          ? (a.dataset.title || "").localeCompare(b.dataset.title || "")
+          : (b.dataset.date || "").localeCompare(a.dataset.date || "");
+      }).forEach(function (li) { list.appendChild(li); });
+      count.textContent = shown;
+      var noun = form.querySelector("[data-job-noun]");
+      if (noun) noun.textContent = shown === 1 ? "role" : "roles";
+      if (empty) {
+        empty.hidden = shown > 0;
+        if (emptyLabel) emptyLabel.textContent = jobs.length && !shown ? "No roles match these filters." : baseLabel;
+      }
+    }
+    form.addEventListener("input", apply);
+    form.addEventListener("change", apply);
+    form.addEventListener("reset", function () { setTimeout(apply, 0); });
+    apply();
+  });
+
   // ---------- carousel ----------
   // Every slide sits at the stage's center and is shifted by its distance from the active one.
   // The active photo is full size; neighbors step down small, medium, then full again at the edges.

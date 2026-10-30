@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&amp;family=Red+Hat+Mono:wght@500&amp;family=Spectral:wght@500&amp;display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/v2/site.css?v=35cb343b" />
+  <link rel="stylesheet" href="/v2/site.css?v=46fba0be" />
 </head>
 <body>
   <header class="hdr" id="nav">
@@ -74,7 +74,39 @@
       </div>
     </section>
     <section class="sec" style="padding-top:0">
-      <div class="wrap"><div class="ph ph--anim phero__ph" role="img" aria-label="No open roles at this time."><span class="ph__label">No open roles at this time.</span></div></div>
+      <div class="wrap">
+        <form class="jobfilter" data-jobfilter role="search" aria-label="Filter open roles" onsubmit="return false">
+          <div class="jobfilter__row">
+            <label class="filter filter--search">
+              <span class="filter__label">Search</span>
+              <input class="filter__input" type="search" name="q" placeholder="Role or keyword" autocomplete="off" />
+            </label>
+          <label class="filter">
+            <span class="filter__label">Team</span>
+            <span class="filter__select"><select name="team"><option value="">All teams</option><option value="engineering">Engineering</option><option value="strategy">Strategy</option><option value="operations">Operations</option></select></span>
+          </label>
+          <label class="filter">
+            <span class="filter__label">Location</span>
+            <span class="filter__select"><select name="location"><option value="">All locations</option><option value="on-site">On site</option><option value="hybrid">Hybrid</option><option value="remote">Remote</option></select></span>
+          </label>
+          <label class="filter">
+            <span class="filter__label">Type</span>
+            <span class="filter__select"><select name="type"><option value="">All types</option><option value="full-time">Full-time</option><option value="contract">Contract</option><option value="internship">Internship</option></select></span>
+          </label>
+          </div>
+          <div class="jobfilter__bar">
+            <p class="jobfilter__count" role="status" aria-live="polite"><span data-job-count>0</span> open <span data-job-noun>roles</span></p>
+            <div class="jobfilter__actions">
+              <button type="reset" class="jobfilter__reset">Clear filters</button>
+              <label class="filter filter--inline">
+                <span class="filter__label">Sort by</span>
+                <span class="filter__select"><select name="sort"><option value="newest">Newest</option><option value="title">Title A to Z</option></select></span>
+              </label>
+            </div>
+          </div>
+        </form>
+        <ul class="jobs" data-jobs aria-label="Open roles"></ul>
+<div class="ph ph--anim phero__ph" role="img" aria-label="No open roles at this time."><span class="ph__label">No open roles at this time.</span></div></div>
     </section>
   </main>
 
@@ -103,6 +135,6 @@
       </div>
     </div>
   </footer>
-  <script src="/v2/site.js?v=658d0953"></script>
+  <script src="/v2/site.js?v=c551706f"></script>
 </body>
 </html>

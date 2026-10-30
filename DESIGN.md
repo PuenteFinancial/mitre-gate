@@ -138,6 +138,13 @@ Financing page (`/financing/`): a coming-soon page. The photo hero (`.phero--pho
 its eyebrow (centered), then a small "What's coming" label over four short tiles with a one-line description each (`.tiles--4`:
 four across, two under 860px, one under 480px). Still `noindex`.
 
+Careers page (`/careers/`): placeholder hero, then a **role filter** card (`.jobfilter`, `data-jobfilter`):
+search plus Team / Location / Type selects (`.filter`, custom chevron), and a bar with the live count
+("0 open roles", `role="status"`), Clear filters and Sort by. Roles go in `[data-jobs]` as
+`<li data-job data-team data-location data-type data-date data-title>`; `site.js` filters, sorts and
+counts them, and shows the "No open roles" banner when none match ("No roles match these filters."
+when roles exist but are filtered out). Four across on desktop, three under 860px, one under 480px.
+
 Contact page (`/contact/`): `.phero` hero, then a two-column `.contact` grid: a dark blue info panel
 (`.contact__panel`, the promo gradient, a serif line, a short note and the email pinned to the bottom)
 beside the shared contact form. Stacks under 860px. The form comes from `contact_form()` in the

@@ -510,7 +510,7 @@ SERVICES_DESC = "Mitre engineers embed with your team to find where AI pays off,
 write("/services/", head("/services/", "Services | Mitre", SERVICES_DESC, False) + header("/services/") + SERVICES_MAIN + footer())
 
 # ---------------- placeholder subpages ----------------
-def subpage(path, eyebrow, h1, lede, extra="", banner=True, title=None, banner_label="Page content coming soon"):
+def subpage(path, eyebrow, h1, lede, extra="", banner=True, title=None, banner_label="Page content coming soon", pre=""):
     main = f"""
   <main id="page">
     <section class="phero">
@@ -521,7 +521,7 @@ def subpage(path, eyebrow, h1, lede, extra="", banner=True, title=None, banner_l
       </div>
     </section>
     <section class="sec" style="padding-top:0">
-      <div class="wrap">{ph("anim", banner_label, "phero__ph") if banner else ""}</div>
+      <div class="wrap">{pre}{ph("anim", banner_label, "phero__ph") if banner else ""}</div>
     </section>
   </main>
 """
@@ -566,13 +566,45 @@ FINANCING_MAIN = f"""
 write("/financing/", head("/financing/", "Financing | Mitre", "", True) + header("/financing/") + FINANCING_MAIN + footer())
 subpage("/industries/", "Industries", "Where we work.", "We embed with operators in six industries. Pick yours to see how we help.",
         extra="\n" + pills("Choose an industry"))
-subpage("/careers/", "Work with us", "Careers", "Explore roles at Mitre.", title="Careers", banner_label="No open roles at this time.")
+def select(name, label, options):
+    opts = "".join(f'<option value="{v}">{t}</option>' for v, t in options)
+    return f"""          <label class="filter">
+            <span class="filter__label">{label}</span>
+            <span class="filter__select"><select name="{name}">{opts}</select></span>
+          </label>"""
+
+
+JOB_FILTERS = f"""
+        <form class="jobfilter" data-jobfilter role="search" aria-label="Filter open roles" onsubmit="return false">
+          <div class="jobfilter__row">
+            <label class="filter filter--search">
+              <span class="filter__label">Search</span>
+              <input class="filter__input" type="search" name="q" placeholder="Role or keyword" autocomplete="off" />
+            </label>
+{select("team", "Team", [("", "All teams"), ("engineering", "Engineering"), ("strategy", "Strategy"), ("operations", "Operations")])}
+{select("location", "Location", [("", "All locations"), ("on-site", "On site"), ("hybrid", "Hybrid"), ("remote", "Remote")])}
+{select("type", "Type", [("", "All types"), ("full-time", "Full-time"), ("contract", "Contract"), ("internship", "Internship")])}
+          </div>
+          <div class="jobfilter__bar">
+            <p class="jobfilter__count" role="status" aria-live="polite"><span data-job-count>0</span> open <span data-job-noun>roles</span></p>
+            <div class="jobfilter__actions">
+              <button type="reset" class="jobfilter__reset">Clear filters</button>
+              <label class="filter filter--inline">
+                <span class="filter__label">Sort by</span>
+                <span class="filter__select"><select name="sort"><option value="newest">Newest</option><option value="title">Title A to Z</option></select></span>
+              </label>
+            </div>
+          </div>
+        </form>
+        <ul class="jobs" data-jobs aria-label="Open roles"></ul>
+"""
+subpage("/careers/", "Work with us", "Careers", "Explore roles at Mitre.", title="Careers", banner_label="No open roles at this time.", pre=JOB_FILTERS)
 CONTACT_MAIN = f"""
   <main id="page">
     <section class="phero" aria-labelledby="contact-title">
       <div class="wrap">
         <p class="eyebrow">Contact</p>
-        <h1 class="h-display" id="contact-title">Talk to us.</h1>
+        <h1 class="h-display" id="contact-title">Talk with a Mitre engineer.</h1>
         <p class="lede">Tell us what you're working on. A real person reads every note.</p>
       </div>
     </section>
