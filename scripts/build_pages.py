@@ -478,7 +478,7 @@ SERVICES_MAIN = f"""
         <div class="promo__bg" aria-hidden="true"></div>
         <div>
           <p class="eyebrow">Yours, outright</p>
-          <h2 id="own-title">You own everything we build.</h2>
+          <h2 id="own-title">You own everything built.</h2>
         </div>
         <p>The code, data, products and processes are yours from day one, whether we hand off or continue supporting. We're model-agnostic, so everything runs on the AI models and tools already selected by your company. Your data stays secure and within your own environments.</p>
       </div>
