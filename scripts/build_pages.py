@@ -587,7 +587,7 @@ JOB_FILTERS = f"""
         </form>
         <ul class="jobs" data-jobs aria-label="Open roles"></ul>
 """
-subpage("/careers/", "Work with us", "Careers", "Explore roles at Mitre.", title="Careers", banner_label="No open roles at this time.", pre=JOB_FILTERS, hero_cls="phero--compact")
+subpage("/careers/", "Work with us", "Careers", "Explore roles at Mitre.", title="Careers", banner_label="No open roles at this time.", pre=JOB_FILTERS)
 CONTACT_MAIN = f"""
   <main id="page">
     <section class="phero" aria-labelledby="contact-title">

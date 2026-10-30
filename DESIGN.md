@@ -138,8 +138,7 @@ Financing page (`/financing/`): a coming-soon page. The photo hero (`.phero--pho
 its eyebrow (centered), then a small "What's coming" label over four short tiles with a one-line description each (`.tiles--4`:
 four across, two under 860px, one under 480px). Still `noindex`.
 
-Careers page (`/careers/`): a compact hero (`.phero--compact`: less top space, smaller title), then a
-slim **role filter** card (`.jobfilter`, `data-jobfilter`): one row of search plus Team / Location / Type
+Careers page (`/careers/`): the standard `.phero` hero, then a slim **role filter** card (`.jobfilter`, `data-jobfilter`): one row of search plus Team / Location / Type
 / Sort selects with `aria-label`s instead of visible labels, and a thin bar with the live count
 ("0 open roles", `role="status"`) and Clear filters. Roles go in `[data-jobs]` as
 `<li data-job data-team data-location data-type data-date data-title>`; `site.js` filters, sorts and

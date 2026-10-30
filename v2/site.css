@@ -461,10 +461,7 @@ a { color: var(--ocean); text-decoration: none; }
 .contact__panel :focus-visible { outline-color: var(--paper); }
 @media (max-width: 860px) { .contact { grid-template-columns: minmax(0, 1fr); } .contact__mail { margin-top: 0; } }
 
-/* ---------- careers: compact hero and role filters above the listings ---------- */
-.phero--compact { padding-top: 120px; }
-.phero--compact h1 { margin-top: 10px; font-size: clamp(30px, 3.2vw, 42px); }
-.phero--compact .lede { margin-top: 10px; }
+/* ---------- careers: role filters above the listings ---------- */
 .jobfilter { margin-top: 32px; padding: 12px; background: var(--paper-raised); border-radius: var(--radius-md); box-shadow: var(--shadow); }
 .jobfilter__row { display: grid; grid-template-columns: minmax(0, 1.6fr) repeat(4, minmax(0, 1fr)); gap: 8px; }
 .filter__input, .filter__select select { width: 100%; min-width: 0; height: 40px; padding: 0 12px; border: 1px solid var(--blue-200); border-radius: var(--radius-sm);
