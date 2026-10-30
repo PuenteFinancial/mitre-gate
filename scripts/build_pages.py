@@ -256,7 +256,7 @@ HOME_MAIN = f"""
         <div>
           <p class="eyebrow eyebrow--row">Trade Financing <span class="badge"><span class="badge__dot" aria-hidden="true"></span>Coming soon</span></p>
           <h2 class="h-section" id="feature-title">Payments and cash management that accelerate growth.</h2>
-          <p class="lede">Growth stalls when cash is tied up in inventory and unpaid invoices. We help you fund purchases, pay suppliers on time and collect faster, with a clear view of your cash built into the systems you already run.</p>
+          <p class="lede">Growth stalls when cash is tied up in inventory and unpaid invoices. We help you fund purchases, pay suppliers on time and collect faster, with a clear view of your cash across all the systems you already run.</p>
           <a class="btn btn--primary" href="/financing/">Explore Financing <span aria-hidden="true">→</span></a>
         </div>
         {ph("anim", "Animation placeholder: Trade Financing", "ph--g feature__vis")}
