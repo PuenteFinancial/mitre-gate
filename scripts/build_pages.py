@@ -213,6 +213,359 @@ SLIDE_TITLE = {
 }
 
 
+# Phase 01 visual: opportunities ranked by return (from the mitre-bars artwork), in the shared glass style.
+# Bars grow in a shuffled order, slide into rank order, values fade in, then the minimum engagement line
+# appears and the bars under it turn to clear glass. Values are illustrative.
+RANK = [9.5, 7.2, 5.8, 4.1, 2.7, 1.9]
+RANK_MIN = 4.0          # minimum engagement threshold
+RANK_START = [1, 3, 5, 0, 4, 2]   # unsorted slot each ranked bar starts in (reads 4.1, 9.5, 1.9, 7.2, 2.7, 5.8)
+
+
+def rank_anim():
+    p, W, H = "rk", 720, 540
+    left, base, unit = 206, 452, 30                      # plot origin; 30 units of height per 1x
+    step, w = 76, 56                                     # column pitch and bar width
+    right = left + 5 * step + w
+    tmin = base - RANK_MIN * unit
+    grid = "".join(f'<path class="an-gridh" d="M{left - 10} {base - k * unit} H{right + 10}"/>' for k in (2, 6, 8))
+    cols = []
+    for i, (v, start) in enumerate(zip(RANK, RANK_START)):
+        x, h = left + i * step, v * unit
+        out = v < RANK_MIN
+        frost = f'<g class="a-fade"{d(3.5, t=".6s")}>{glass(p, x, base - h, w, h, 12)}</g>' if out else ""
+        val = "an-t an-t--sm an-t--mute" if out else "an-t an-t--sm"
+        # --i: rank, --dx: offset from the ranked slot back to the starting slot
+        cols.append(f'<g class="rk-col" style="--i:{i};--dx:{(start - i) * step}px">'
+                    f'<g class="a-gy"{d(.3 + start * .1, t=".7s")}>{glass(p, x, base - h, w, h, 12, "tint")}</g>{frost}'
+                    f'<text class="{val} a-fade" x="{x + w / 2}" y="{base - h - 14}" text-anchor="middle"{d(2.7 + i * .07, t=".4s")}>{v}x</text></g>')
+    label = (f"Six opportunities ranked by return, from {RANK[0]}x to {RANK[-1]}x. "
+             f"{sum(v >= RANK_MIN for v in RANK)} clear the minimum engagement threshold.")
+    return (svg_open("rk", W, H, label) + glass_defs(p)
+            + f'<g class="a-pop">{glass(p, 30, 30, 660, 480, 20)}'
+            + f'<text class="an-t" x="58" y="72">Opportunities</text>'
+            + f'<text class="an-m" x="662" y="72" text-anchor="end">Ranked by return</text></g>'
+            + f'<g class="a-fade"{d(.2)}>{grid}<path class="an-axis" d="M{left - 10} {base} H{right + 10}"/></g>'
+            + "".join(cols)
+            # x axis: the ranked opportunities above the threshold read as a roadmap, 01 to 04
+            + f'<g class="a-fade"{d(2.6, t=".5s")}><text class="an-m an-m--min" x="{left - 22}" y="{base + 30}" text-anchor="end">Roadmap</text>'
+            + "".join(f'<text class="an-m" x="{left + k * step + w / 2}" y="{base + 30}" text-anchor="middle">{k + 1:02d}</text>' for k in range(sum(v >= RANK_MIN for v in RANK)))
+            + "</g>"
+            + f'<g class="a-fade"{d(3.5, t=".6s")}><path class="an-min" d="M{left - 10} {tmin} H{right + 10}"/>'
+            + f'<circle class="an-live" cx="{left - 10}" cy="{tmin}" r="5"/>'
+            + f'<text class="an-m an-m--min" x="{left - 22}" y="{tmin + 4}" text-anchor="end">Min. engagement</text></g>'
+            + "</svg>")
+
+# ---------------- services animations: shared glass + motion toolkit ----------------
+# Every animation is an inline SVG in a <figure class="anim">. site.js adds .is-armed, then .is-play when
+# it is in view; the motion classes (a-pop, a-rise, a-drop, a-gx, a-gy, a-draw, a-to, a-flow) are in site.css
+# and read their delay from --d. Without JS, or with reduced motion, the finished frame shows.
+ICONS = {
+    "crm": '<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/>',
+    "billing": '<rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/>',
+    "inventory": '<path d="M3 7l9-4 9 4v10l-9 4-9-4z"/><path d="M3 7l9 4 9-4M12 11v10"/>',
+    "reports": '<path d="M5 20v-8M12 20V5M19 20v-5"/>',
+    "email": '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>',
+    "calendar": '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
+    "sheet": '<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M4 9h16M4 15h16M10 3v18"/>',
+    "erp": '<rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/><path d="M7 7h.01M7 17h.01"/>',
+    "calls": '<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/>',
+    "agent": '<path d="M12 3l2 5.5L19.5 10 14 12l-2 5.5L10 12 4.5 10 10 8.5z"/><path d="M19 16l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/>',
+    "flow": '<circle cx="5" cy="6" r="2.5"/><circle cx="19" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M7.5 6h9M6.5 8.2l4.2 7.6M17.5 8.2l-4.2 7.6"/>',
+    "app": '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 13h6M7 16h4"/>',
+    "time": '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+    "cost": '<circle cx="12" cy="12" r="9"/><path d="M15 9.5c-.6-1-1.7-1.5-3-1.5-1.7 0-3 .8-3 2s1.3 1.7 3 2 3 .8 3 2-1.3 2-3 2c-1.3 0-2.4-.5-3-1.5M12 6v2M12 16v2"/>',
+    "insight": '<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.3 1 2.1h5c0-.8.4-1.6 1-2.1A6 6 0 0 0 12 3z"/>',
+    "check": '<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+    "manual": '<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1M9 10h6M9 14h6M9 18h3"/>',
+    "coin": '<circle cx="12" cy="12" r="8"/><path d="M12 8v8M9.5 10.5c0-1 1.1-1.6 2.5-1.6s2.5.6 2.5 1.6-1.1 1.4-2.5 1.5-2.5.6-2.5 1.6 1.1 1.6 2.5 1.6 2.5-.6 2.5-1.6"/>',
+    "handoff": '<path d="M4 12h12M12 7l5 5-5 5"/><path d="M20 4v16"/>',
+    "team": '<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.5 3-5.5 6.5-5.5s6.5 2 6.5 5.5"/><circle cx="17" cy="9" r="2.8"/><path d="M17 14.5c2.8 0 4.5 1.6 4.5 4.5"/>',
+}
+
+
+def icon(name, x, y, size=24, cls="an-ico"):
+    return f'<g class="{cls}" transform="translate({x} {y}) scale({size / 24})">{ICONS[name]}</g>'
+
+
+def glass_defs(p):
+    """Gradients and filters for one SVG. Ids are per SVG (prefix p) so a hidden phase never breaks another."""
+    return f"""<defs>
+                <linearGradient id="{p}-g" x1="0" y1="0" x2="0" y2="1"><stop class="gl-g0" offset="0"/><stop class="gl-gm" offset=".55"/><stop class="gl-g1" offset="1"/></linearGradient>
+                <linearGradient id="{p}-gh" x1="0" y1="0" x2="1" y2="0"><stop class="gl-g0" offset="0"/><stop class="gl-gm" offset=".6"/><stop class="gl-g1" offset="1"/></linearGradient>
+                <linearGradient id="{p}-f" x1="0" y1="0" x2="0" y2="1"><stop class="gl-f0" offset="0"/><stop class="gl-f1" offset="1"/></linearGradient>
+                <linearGradient id="{p}-l" x1="0" y1="0" x2="1" y2="0"><stop class="gl-l0" offset="0"/><stop class="gl-l1" offset=".3"/><stop class="gl-l1" offset=".75"/><stop class="gl-l2" offset="1"/></linearGradient>
+                <linearGradient id="{p}-e" x1="0" y1="0" x2="1" y2="1"><stop class="gl-e0" offset="0"/><stop class="gl-e1" offset=".6"/></linearGradient>
+                <linearGradient id="{p}-c" x1="0" y1="0" x2="0" y2="1"><stop class="gl-c0" offset="0"/><stop class="gl-c1" offset="1"/></linearGradient>
+                <filter id="{p}-sh" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow class="gl-sh" dx="0" dy="8" stdDeviation="8"/></filter>
+              </defs>"""
+
+
+def glass(p, x, y, w, h, r=14, kind="frost"):
+    """One glass shape: body (tint = see-through brand blue to teal, tinth = the same running sideways,
+    frost = clear panel), side lighting, a soft top cap and a bright edge, with a soft shadow."""
+    body = {"tint": "g", "tinth": "gh", "frost": "f"}[kind]
+    cap = min(26, h / 3)
+    return (f'<g filter="url(#{p}-sh)">'
+            f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{r}" fill="url(#{p}-{body})"/>'
+            f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{r}" fill="url(#{p}-l)"/>'
+            f'<rect x="{x + 3}" y="{y + 3}" width="{w - 6}" height="{cap}" rx="{max(r - 3, 2)}" fill="url(#{p}-c)"/>'
+            f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{r}" fill="none" stroke="url(#{p}-e)" stroke-width="1.5"/></g>')
+
+
+def svg_open(cls, vw, vh, label):
+    tid = cls + "-title"
+    return f'<svg class="anim__svg {cls}" viewBox="0 0 {vw} {vh}" role="img" aria-labelledby="{tid}"><title id="{tid}">{label}</title>'
+
+
+def d(sec, **extra):
+    """Inline style for a motion delay (and any other custom properties)."""
+    props = [f"--d:{sec:g}s"] + [f"--{k}:{v}" for k, v in extra.items()]
+    return f' style="{";".join(props)}"'
+
+
+# ---- vendor tools consolidating into one owned system (16:9) ----
+VENDORS = [("crm", "CRM"), ("billing", "Billing"), ("inventory", "Inventory"),
+           ("reports", "Reports"), ("email", "Email"), ("calendar", "Scheduling")]
+
+
+def vendor_anim():
+    p, W, H = "vd", 960, 540
+    px, py, pw, ph_ = 300, 54, 360, 432                  # the owned system panel
+    cx, cy = px + pw / 2, py + ph_ / 2
+    tw, th = 236, 100
+    spots = [(20, 34), (20, 220), (20, 406), (704, 34), (704, 220), (704, 406)]
+    tiles = []
+    for i, ((key, name), (x, y)) in enumerate(zip(VENDORS, spots)):
+        dx, dy = cx - (x + tw / 2), cy - (y + th / 2)
+        tiles.append(f'<g class="a-to"{d(1.7 + i * .06, dx=f"{dx:g}px", dy=f"{dy:g}px")}><g class="a-pop"{d(i * .12)}>'
+                     f'{glass(p, x, y, tw, th, 18)}{icon(key, x + 22, y + 34, 32)}'
+                     f'<text class="an-t an-t--lg" x="{x + 70}" y="{y + 46}">{name}</text>'
+                     f'<text class="an-m an-m--lg" x="{x + 70}" y="{y + 76}">Per seat</text></g></g>')
+    rows = []
+    for i, (key, name) in enumerate(VENDORS):
+        ry = py + 114 + i * 44
+        rows.append(f'<g class="a-rise"{d(2.5 + i * .1)}>{icon(key, px + 30, ry - 14, 28)}'
+                    f'<text class="an-t an-t--lg" x="{px + 72}" y="{ry + 9}">{name}</text>'
+                    f'{icon("check", px + pw - 58, ry - 14, 28, "an-ico an-ico--ok")}</g>')
+    # once the tools fold in, a small card beside the panel shows monthly cost stepping down (no figures)
+    kx, ky, kw, kh = 684, 196, 252, 148
+    pts = [(kx + 24 + k * 40, v) for k, v in enumerate((0, 4, 18, 22, 36, 40))]
+    trend = "M" + " L".join(f"{x:g} {ky + 92 + v:g}" for x, v in pts)
+    savings = (f'<g class="a-pop"{d(3.4)}>{glass(p, kx, ky, kw, kh, 18)}'
+               f'<g>{glass(p, kx + 20, ky + 20, 40, 40, 12, "tint")}</g>{icon("coin", kx + 29, ky + 29, 22, "an-ico an-ico--on")}'
+               f'<text class="an-m an-m--lg" x="{kx + 74}" y="{ky + 46}">Monthly cost</text></g>'
+               f'<path class="an-line an-line--save a-draw" pathLength="1" d="{trend}"{d(3.8, t="1.1s")}/>'
+               f'<circle class="an-ok a-pop" cx="{pts[-1][0]}" cy="{ky + 92 + pts[-1][1]}" r="6"{d(4.8)}/>')
+    return (svg_open("vd", W, H, "Six rented tools, each billed per seat, fold into one system you own, and monthly cost steps down.")
+            + glass_defs(p)
+            + f'<g class="a-pop"{d(2.0)}>{glass(p, px, py, pw, ph_, 20)}'
+            + f'<text class="an-t an-t--xl" x="{px + 30}" y="{py + 58}">Your system</text>'
+            + f'<path class="an-rule" d="M{px + 30} {py + 82} H{px + pw - 30}"/></g>'
+            + f'<g class="a-pop"{d(3.2)}>{glass(p, cx - 78, py + ph_ - 60, 156, 42, 21)}'
+            + f'<circle class="an-ok" cx="{cx - 50}" cy="{py + ph_ - 39}" r="11"/>{icon("check", cx - 58, py + ph_ - 47, 16, "an-ico an-ico--on")}'
+            + f'<text class="an-m an-m--lg an-m--ok" x="{cx - 30}" y="{py + ph_ - 32}">Owned</text></g>'
+            + savings + "".join(rows) + "".join(tiles) + "</svg>")
+
+
+# ---- phase 02: scattered sources flowing into one data layer ----
+TRACKED = [("sheet", "Spreadsheets"), ("erp", "ERP"), ("crm", "CRM")]                 # above the layer, flowing down
+UNTRACKED = [("email", "Email"), ("calls", "Calls"), ("manual", "Manual workflows")]     # below it: captured, flowing up
+
+
+def unify_anim():
+    p, W, H = "un", 720, 540
+    sx, sy, sw, sh = 50, 206, 620, 112                  # the data layer, in the middle
+    chh = 44
+    xs = [168, 360, 552]
+    def chip(key, name, cx, cy):
+        cw = max(96, 58 + len(name) * 8.8)               # fit each label, with room to breathe
+        x, y = cx - cw / 2, cy - chh / 2
+        body = (f'{glass(p, x, y, cw, chh, 22)}{icon(key, x + 14, y + 12, 20)}'
+                f'<text class="an-t an-t--sm" x="{x + 42}" y="{y + 28}">{name}</text>')
+        return x, y, cw, body
+    parts, lines, flows = [], [], []
+    for i, ((key, name), cx) in enumerate(zip(TRACKED, xs)):
+        x, y, cw, body = chip(key, name, cx, 62)
+        tx = 360 + (cx - 360) * .5
+        path = f"M{cx} {y + chh} C{cx} {y + chh + 70} {tx} {sy - 70} {tx} {sy}"
+        lines.append(f'<path class="an-link a-draw" pathLength="1" d="{path}"{d(1.0 + i * .12, t=".8s")}/>')
+        flows.append(f'<path class="an-flow a-flow" pathLength="1" d="{path}"{d(1.8 + i * .12)}/>')
+        parts.append(f'<g class="a-pop"{d(.2 + i * .12)}>{body}</g>')
+    for i, ((key, name), cx) in enumerate(zip(UNTRACKED, xs)):
+        x, y, cw, body = chip(key, name, cx, 444)
+        cap = 2.4 + i * .4                                # each one is captured in turn
+        tx = 360 + (cx - 360) * .5
+        path = f"M{cx} {y} C{cx} {y - 70} {tx} {sy + sh + 70} {tx} {sy + sh}"
+        lines.append(f'<path class="an-link a-draw" pathLength="1" d="{path}"{d(cap + .3, t=".8s")}/>')
+        flows.append(f'<path class="an-flow a-flow" pathLength="1" d="{path}"{d(cap + 1.1)}/>')
+        parts.append(f'<g class="a-out"{d(cap - .1)}><g class="a-fade"{d(.6)}>'
+                     f'<rect class="an-ghost" x="{x}" y="{y}" width="{cw}" height="{chh}" rx="22"/></g></g>'
+                     f'<g class="a-pop"{d(cap)}>{body}</g>')
+    recs = "".join(f'<rect class="an-rec a-gx" x="{sx + 24}" y="{sy + 58 + k * 18}" width="{w}" height="8" rx="4"{d(1.9 + k * .6, t="1s")}/>'
+                   for k, w in enumerate((420, 520, 340)))
+    return (svg_open("un", W, H, "Spreadsheets, ERP and CRM flow into one unified data layer, then email, calls and manual workflows, which were not tracked before, are captured into it too.")
+            + glass_defs(p)
+            + "".join(lines) + "".join(flows)
+            + f'<g class="a-pop"{d(.4)}>{glass(p, sx, sy, sw, sh, 20, "tinth")}'
+            + f'<text class="an-t an-t--on" x="{sx + 24}" y="{sy + 38}">Unified data layer</text>'
+            + f'<text class="an-m an-m--on" x="{sx + sw - 24}" y="{sy + 38}" text-anchor="end">Single source of truth</text></g>'
+            + recs
+            + f'<g class="a-out"{d(2.3)}><text class="an-m a-fade" x="360" y="510" text-anchor="middle"{d(.6)}>Not tracked yet</text></g>'
+            + "".join(parts) + "</svg>")
+
+# ---- phase 03: agents and apps built on the data layer ----
+BUILDS = [("agent", "AI agents"), ("flow", "Workflows"), ("app", "Custom software"), ("reports", "Reporting")]
+
+
+def build_anim():
+    p, W, H = "bd", 720, 540
+    sx, sy, sw, sh = 50, 438, 620, 62                   # the data layer, at the base
+    tw, th = 240, 104
+    lx, rx = 58, 422                                     # tile columns; the gap between them carries the top links
+    spots = [(lx, 290), (rx, 290), (lx, 66), (rx, 66)]  # bottom row first: the build grows upward
+    bt, tt = 290 + th, 66 + th                           # bottom edges of the two rows
+    routes = [
+        f"M200 {sy} C200 {sy - 24} {lx + tw / 2} {bt + 24} {lx + tw / 2} {bt}",              # gentle S into the bottom tiles
+        f"M520 {sy} C520 {sy - 24} {rx + tw / 2} {bt + 24} {rx + tw / 2} {bt}",
+        f"M345 {sy} C345 280 {lx + tw - 40} 300 {lx + tw - 40} {tt}",                        # up the middle gap, arcing
+        f"M375 {sy} C375 280 {rx + 40} 300 {rx + 40} {tt}",                                  # into the top tiles
+    ]
+    nodes, links, flows, tiles = [], [], [], []
+    for i, ((key, name), (x, y), path) in enumerate(zip(BUILDS, spots, routes)):
+        top = i >= 2
+        t_link = .5 + i * .12
+        t_tile = t_link + (.75 if top else .45)
+        sxp = float(path.split()[0][1:])
+        nodes.append(f'<circle class="an-node a-pop" cx="{sxp}" cy="{sy}" r="6"{d(.35 + i * .08)}/>')
+        links.append(f'<path class="an-link an-link--strong a-draw" pathLength="1" d="{path}"{d(t_link, t=(".8s" if top else ".5s"))}/>')
+        flows.append(f'<path class="an-flow a-flow" pathLength="1" d="{path}"{d(t_tile + .3 + i * .25)}/>')
+        tiles.append(f'<g class="a-rise"{d(t_tile)}>{glass(p, x, y, tw, th, 18)}'
+                     f'<g>{glass(p, x + 18, y + 18, 46, 46, 13, "tint")}</g>{icon(key, x + 29, y + 29, 24, "an-ico an-ico--on")}'
+                     f'<text class="an-t" x="{x + 78}" y="{y + 47}">{name}</text>'
+                     f'<g class="a-pop"{d(2.5 + i * .15)}><circle class="an-live" cx="{x + 26}" cy="{y + 84}" r="5"/>'
+                     f'<text class="an-m" x="{x + 40}" y="{y + 89}">Live</text></g></g>')
+    return (svg_open("bd", W, H, "AI agents, workflows, custom software and reporting built out from the unified data layer.")
+            + glass_defs(p)
+            + f'<g class="a-pop">{glass(p, sx, sy, sw, sh, 20, "tinth")}'
+            + f'<text class="an-t an-t--on" x="{sx + 24}" y="{sy + 38}">Unified data layer</text></g>'
+            + "".join(links) + "".join(flows) + "".join(nodes) + "".join(tiles) + "</svg>")
+
+# ---- phase 04: scorecard against the baseline ----
+KPIS = [("time", "Time saved", .86), ("cost", "Cost savings", .74), ("insight", "New insight", .92)]
+
+
+def prove_anim():
+    p, W, H = "pv", 720, 540
+    cards = []
+    for i, (key, name, v) in enumerate(KPIS):
+        x, y, w, h = 30 + i * 226, 30, 208, 132
+        rx0, rx1, ry = x + 20, x + w - 20, y + 96
+        base = rx0 + (rx1 - rx0) * .42
+        cards.append(f'<g class="a-pop"{d(i * .12)}>{glass(p, x, y, w, h, 18)}{icon(key, x + 18, y + 20, 24)}'
+                     f'<text class="an-t an-t--sm" x="{x + 50}" y="{y + 37}">{name}</text>'
+                     f'<rect class="an-rail" x="{rx0}" y="{ry}" width="{rx1 - rx0}" height="12" rx="6"/>'
+                     f'<g class="a-gx"{d(2.6 + i * .15, t="1s")}>{glass(p, rx0, ry, (rx1 - rx0) * v, 12, 6, "tinth")}</g>'
+                     f'<path class="an-tick" d="M{base} {ry - 8} V{ry + 20}"/>'
+                     f'<text class="an-m" x="{base}" y="{ry - 14}" text-anchor="middle">Base</text>'
+                     f'<g class="a-pop"{d(3.3 + i * .12)}><circle class="an-ok" cx="{x + w - 22}" cy="{y + 22}" r="11"/>'
+                     f'{icon("check", x + w - 30, y + 14, 16, "an-ico an-ico--on")}</g></g>')
+    # the measured line, rising above the baseline period by period
+    cx0, cx1, cyb = 92, 640, 430
+    ys = [0, 4, 16, 34, 58, 80, 98, 112]
+    xs = [cx0 + (cx1 - cx0) * k / (len(ys) - 1) for k in range(len(ys))]
+    line = "M" + " L".join(f"{x:g} {cyb - v:g}" for x, v in zip(xs, ys))
+    area = line + f" L{cx1} {cyb} L{cx0} {cyb} Z"
+    ticks = "".join(f'<path class="an-gridv" d="M{x:g} {cyb - 150} V{cyb + 8}"/>' for x in xs[1:-1])
+    chart = (f'<g class="a-pop"{d(.3)}>{glass(p, 30, 196, 660, 314, 20)}'
+             f'<text class="an-t" x="58" y="236">Scorecard</text>'
+             f'<text class="an-m" x="662" y="236" text-anchor="end">Against the baseline</text></g>'
+             f'<g class="a-fade"{d(.8)}>{ticks}<path class="an-base" d="M{cx0} {cyb} H{cx1}"/>'
+             f'<text class="an-m" x="{cx1}" y="{cyb + 26}" text-anchor="end">Baseline</text></g>'
+             f'<path class="an-area a-fade" d="{area}" fill="url(#{p}-g)"{d(1.9, t=".8s")}/>'
+             f'<path class="an-line a-draw" pathLength="1" d="{line}"{d(1.0, t="1.4s")}/>'
+             f'<g class="a-pop"{d(2.3)}><circle class="an-dot" cx="{cx1}" cy="{cyb - ys[-1]}" r="7"/>'
+             f'<text class="an-t an-t--sm" x="{cx1 - 14}" y="{cyb - ys[-1] - 18}" text-anchor="end">Measured</text></g>')
+    return (svg_open("pv", W, H, "A scorecard of time saved, cost savings and new insight, each measured above its baseline.")
+            + glass_defs(p) + chart + "".join(cards) + "</svg>")
+
+
+
+
+# ---- homepage offering cards: simplified Assess, Build and Prove (no labels) ----
+# Same structure as the Services phases, cut down for the narrower cards. No build-up: each graphic is
+# already assembled and fades in as one piece (.anim--soft), then a slow repeating motion runs
+# (amb-* classes in site.css). Reduced motion keeps it still.
+def home_assess():
+    p, W, H = "ha", 400, 300
+    # loop: shuffled, glide into rank, the ones under the line frost over, hold, fade and reshuffle
+    vals, start_slot, vmin = [9, 7, 5.5, 3.2, 2], [2, 4, 0, 3, 1], 4
+    left, base, unit, step, w = 70, 262, 23, 56, 40
+    right = left + 4 * step + w
+    tmin = base - vmin * unit
+    cols = []
+    for i, (v, st) in enumerate(zip(vals, start_slot)):
+        x, h = left + i * step, v * unit
+        frost = f'<g class="hr-frost">{glass(p, x, base - h, w, h, 10)}</g>' if v < vmin else ""
+        cols.append(f'<g class="hr-col" style="--i:{i};--dx:{(st - i) * step}px">{glass(p, x, base - h, w, h, 10, "tint")}{frost}</g>')
+    return (svg_open("ha", W, H, "Opportunities ranked by return, with the ones below the minimum engagement set aside.")
+            + glass_defs(p)
+            + f'<path class="an-axis" d="M{left - 12} {base} H{right + 12}"/>'
+            + '<g class="hr-set">' + "".join(cols) + "</g>"
+            + f'<path class="an-min" d="M{left - 12} {tmin} H{right + 12}"/>'
+            + f'<circle class="an-live" cx="{left - 12}" cy="{tmin}" r="4.5"/>'
+            + "</svg>")
+
+
+def home_build():
+    p, W, H = "hb", 400, 300
+    sx, sy, sw, sh = 40, 244, 320, 40
+    tw, th = 120, 60
+    spots = [(56, 158), (224, 158), (56, 50), (224, 50)]
+    routes = [
+        f"M126 {sy} C126 {sy - 14} 116 {158 + th + 14} 116 {158 + th}",
+        f"M274 {sy} C274 {sy - 14} 284 {158 + th + 14} 284 {158 + th}",
+        f"M194 {sy} C194 142 156 136 156 {50 + th}",
+        f"M206 {sy} C206 142 244 136 244 {50 + th}",
+    ]
+    links, flows, nodes, tiles = [], [], [], []
+    for i, ((key, _), (x, y), path) in enumerate(zip(BUILDS, spots, routes)):
+        sxp = float(path.split()[0][1:])
+        nodes.append(f'<circle class="an-node" cx="{sxp}" cy="{sy}" r="4.5"/>')
+        links.append(f'<path class="an-link an-link--strong" d="{path}"/>')
+        flows.append(f'<path class="an-flow a-flow" pathLength="1" d="{path}"{d(.8 + i * .7)}/>')
+        tiles.append(f'<g>{glass(p, x, y, tw, th, 14)}'
+                     f'<g>{glass(p, x + 12, y + 12, 36, 36, 10, "tint")}</g>{icon(key, x + 20, y + 20, 20, "an-ico an-ico--on")}'
+                     f'<rect class="an-docline" x="{x + 60}" y="{y + 20}" width="44" height="6" rx="3"/>'
+                     f'<rect class="an-docline" x="{x + 60}" y="{y + 34}" width="28" height="6" rx="3"/>'
+                     f'<circle class="an-live amb-glow" cx="{x + tw - 14}" cy="{y + 14}" r="4"{d(i * .6)}/></g>')
+    return (svg_open("hb", W, H, "Agents, workflows, software and reporting built out from one data layer.")
+            + glass_defs(p)
+            + glass(p, sx, sy, sw, sh, 14, "tinth")
+            + "".join(links) + "".join(flows) + "".join(nodes) + "".join(tiles) + "</svg>")
+
+
+def home_prove():
+    p, W, H = "hp", 400, 300
+    rows = []
+    r0, r1 = 36, 318
+    for i, v in enumerate((.86, .72, .92)):
+        y = 58 + i * 78
+        tick = r0 + (r1 - r0) * .42
+        rows.append(f'<rect class="an-docline" x="{r0}" y="{y - 26}" width="{(70, 92, 80)[i]}" height="7" rx="3.5"/>'
+                    f'<rect class="an-rail" x="{r0}" y="{y}" width="{r1 - r0}" height="18" rx="9"/>'
+                    f'<g class="amb-x"{d(i * .7)}>{glass(p, r0, y, (r1 - r0) * v, 18, 9, "tinth")}</g>'
+                    f'<path class="an-tick" d="M{tick} {y - 8} V{y + 26}"/>'
+                    f'<circle class="an-ok" cx="{r1 + 30}" cy="{y + 9}" r="12"/>'
+                    f'{icon("check", r1 + 22, y + 1, 16, "an-ico an-ico--on")}')
+    return (svg_open("hp", W, H, "Time saved, cost savings and new insight, each measured above its baseline.")
+            + glass_defs(p) + "".join(rows) + "</svg>")
+
+
+HOME_ANIM = {"01": home_assess, "02": home_build, "03": home_prove}
+
+PHASE_ANIM = {"01": rank_anim, "02": unify_anim, "03": build_anim, "04": prove_anim}
+
+
 # ---------------- homepage ----------------
 SLIDE_TONES = ["", "ph--g", "ph--dark", "ph--mix", "", "ph--g"]
 slides = []
@@ -259,13 +612,15 @@ OFFER = [
      "Animation: scorecard against the baseline"),
 ]
 cards = "\n".join(f"""        <article class="card">
-          {ph("anim", anim, "ph--g" if n == "02" else "")}
+          <figure class="card__vis anim anim--soft">{HOME_ANIM[n]()}</figure>
           <div class="card__chip"><b>{n}</b><span>{chip}</span></div>
           <div class="card__panel">
-            <h3>{title}</h3>
+            <div class="card__head">
+              <h3>{title}</h3>
+              <a class="btn btn--primary btn--sm card__go" href="/services/">Services <span aria-hidden="true">→</span></a>
+            </div>
             <div class="card__more"><div>
               <p>{body}</p>
-              <a class="btn btn--primary" href="/services/">Our Service <span aria-hidden="true">→</span></a>
             </div></div>
           </div>
         </article>""" for n, chip, title, body, anim in OFFER)
@@ -346,7 +701,7 @@ HOME_MAIN = f"""
           <p class="lede">Growth stalls when cash is tied up in inventory and unpaid invoices. We help you fund purchases, pay suppliers on time and collect faster, with a clear view of your cash across all the systems you already run.</p>
           <a class="btn btn--primary" href="/financing/">Explore Financing <span aria-hidden="true">→</span></a>
         </div>
-        {ph("anim", "Animation placeholder: Trade Financing", "ph--g feature__vis")}
+        <img class="feature__vis feature__img" src="/assets/photos/glass-blocks.jpg?v={ver("assets/photos/glass-blocks.jpg")}" alt="A wall of glass blocks lit softly from behind" width="2000" height="1333" loading="lazy" decoding="async" />
       </div>
     </section>
 
@@ -421,6 +776,8 @@ PATHS = [
 ]
 
 
+
+
 def phase_panel(n, name, title, desc, tags, deliv, link, anim):
     extra = ""
     if tags:
@@ -430,14 +787,17 @@ def phase_panel(n, name, title, desc, tags, deliv, link, anim):
         extra += f'\n              <p class="phase__deliv">{deliv}</p>'
     if link:
         extra += f'\n              <a class="more phase__link" href="{link[1]}">{link[0]}</a>'
-    if anim:
+    if n in PHASE_ANIM:
+        side = f'<figure class="phase__vis anim">\n            {PHASE_ANIM[n]()}\n          </figure>'
+    elif anim:
         side = ph("anim", anim, "phase__vis")
     else:
-        cards = "\n".join(f"""              <div class="path">
+        cards = "\n".join(f"""              <div class="path a-rise"{d(.15 + k * .15)}>
+                <span class="path__ico" aria-hidden="true"><svg viewBox="0 0 24 24">{ICONS[ico]}</svg></span>
                 <h4 class="path__title">{t}</h4>
                 <p>{b}</p>
-              </div>""" for t, b in PATHS)
-        side = f'<div class="paths">\n{cards}\n            </div>'
+              </div>""" for k, ((t, b), ico) in enumerate(zip(PATHS, ("handoff", "team"))))
+        side = f'<div class="paths anim">\n{cards}\n            </div>'
     return f"""          <section class="phase" id="phase-{n}" aria-labelledby="phase-{n}-title">
             <div class="phase__txt">
               <p class="phase__label">Phase {n} · {name}</p>
@@ -502,7 +862,7 @@ SERVICES_MAIN = f"""
           <h2 class="h-section" id="saas-title">Shrink your vendor stack.</h2>
           <p class="lede">Many of the tools you pay for every month can be replaced with custom software built around how you actually work. You own it outright and stop paying for seats and features you don't use.</p>
         </div>
-        {ph("anim", "Animation placeholder: vendor tools consolidating into one owned system", "ph--g feature__vis")}
+        <figure class="feature__vis anim">{vendor_anim()}</figure>
       </div>
     </section>
 
@@ -591,10 +951,9 @@ FIN_PRODUCTS = [
     ("Letters of Credit", "A bank-backed payment guarantee that gives suppliers, especially overseas, the confidence to ship."),
 ]
 fin_tiles = "\n".join(f"""          <article class="tile">
-            <p class="tile__n">{i:02d}</p>
             <h3 class="tile__title">{t}</h3>
             <p class="tile__body">{b}</p>
-          </article>""" for i, (t, b) in enumerate(FIN_PRODUCTS, 1))
+          </article>""" for t, b in FIN_PRODUCTS)
 FINANCING_MAIN = f"""
   <main id="page">
     <section class="phero phero--photo phero--busy" aria-labelledby="fin-title">
@@ -608,9 +967,8 @@ FINANCING_MAIN = f"""
        </div>
       </div>
     </section>
-    <section class="sec" aria-labelledby="fin-products-title">
+    <section class="sec fin-products" aria-label="Financing products">
       <div class="wrap">
-        <h2 class="fin__k" id="fin-products-title">What's coming</h2>
         <div class="tiles tiles--4">
 {fin_tiles}
         </div>
