@@ -137,6 +137,20 @@
     apply();
   });
 
+  // ---------- services animations ----------
+  // Each .anim plays its sequence (CSS in site.css) every time it comes into view, including when its
+  // phase tab is shown again. Reduced motion keeps the finished frame.
+  var anims = document.querySelectorAll(".anim");
+  if (anims.length && !reduced && "IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.intersectionRatio >= 0.5) e.target.classList.add("is-play");
+        else if (!e.isIntersecting) e.target.classList.remove("is-play");
+      });
+    }, { threshold: [0, 0.5] });
+    anims.forEach(function (a) { a.classList.add("is-armed"); io.observe(a); });
+  }
+
   // ---------- carousel ----------
   // Every slide sits at the stage's center and is shifted by its distance from the active one.
   // The active photo is full size; neighbors step down small, medium, then full again at the edges.
