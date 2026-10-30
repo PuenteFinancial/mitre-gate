@@ -176,3 +176,53 @@ Everything respects `prefers-reduced-motion`. The carousel starts paused and the
 
 The blue M at 70% on a rounded cream tile (`favicon.svg`, `favicon-32.png`). The 180px
 `apple-touch-icon.png` stays square because iOS rounds it. This keeps the icon visible on dark tabs.
+
+## Visuals and animation (in progress)
+
+The language for the six animation placeholders and any future brand graphics. Sections marked
+**Decided** are settled; **Open** is still being worked out. Update this as decisions land.
+
+### Decided
+
+- **Water and glass are core brand materials.** Water surfaces and waves; glass on buildings and
+  inside warehouses; anything that slightly refracts or distorts light or the image behind it. The
+  deep blues and sea greens of water and glass are part of the identity, and the photography already
+  leans on them (`water.jpg`, `glass-towers.jpg`). Keep returning to these materials.
+- **Weighted, not dainty.** Lines and shapes are solid and carry weight. Take stroke weight cues
+  from the M mark's stems, not hairlines.
+- **Light-touch metaphor.** Borrow a little from the mitre gate: chevrons, levels, flow. No literal
+  canal-lock scenes or illustrations.
+- **Quiet, on palette.** Core tokens only (blues lead, greens accent, cream ground). Visuals should
+  feel like they live inside the site, never loud or attention-grabbing.
+- **Stills first, motion second.** Every visual is first approved as a static image. Motion, a
+  distortion effect or 3D is a layer added on top of an approved still, never designed from scratch.
+- **Some movement is wanted**, either inside the visual or as a water/glass distortion over it.
+  Keep it simple at first. Respect `prefers-reduced-motion` (show the still).
+- **One shared world.** Placeholders 1 to 4 tell one story (sources, data layer, what's built on it,
+  results). Recurring objects (a source, the data layer, an agent/app, a metric) look the same in
+  every visual they appear in.
+
+### The six placeholders
+
+| # | Visual | Where | Container |
+|---|---|---|---|
+| 1 | Opportunities ranked by return (Assess) | Home + industry offering card 01; Services phase 01 | 4:5 card background, and 4:3 phase visual |
+| 2 | Scattered sources flowing into one data layer (Unify) | Services phase 02 | 4:3 phase visual |
+| 3 | Agents and apps built on the data layer (Build) | Offering card 02; Services phase 03 | 4:5 card background, and 4:3 phase visual |
+| 4 | Scorecard against the baseline (Prove) | Offering card 03; Services phase 04 | 4:5 card background, and 4:3 phase visual |
+| 5 | Vendor tools consolidating into one owned system | Services compact feature | 16:9, on the `--green-50` band |
+| 6 | Trade financing | Home feature panel | Large rounded visual on the `--green-50` band |
+
+Layout constraints: on offering cards the visual is a background under a glass chip (top-left) and
+a glass text panel (bottom-left), so keep the subject clear of those corners and make sure it reads
+through `backdrop-filter: blur`. Visuals 1, 3 and 4 must compose for both 4:5 and 4:3. Phase visuals
+are hidden on phones.
+
+### Open
+
+- References (Colton gathering examples).
+- Abstraction level: schematic diagram, product-like UI, or schematic with realistic mono labels.
+- How water/glass shows up: as the subject, as a material the diagram sits behind, or as a
+  distortion layer over a still.
+- Exact stroke weights, corner radii and color roles inside visuals.
+- Medium for stills (code-drawn SVG vs rendered image) and for the motion layer.
