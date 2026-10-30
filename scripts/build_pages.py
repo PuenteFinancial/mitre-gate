@@ -524,11 +524,17 @@ def subpage(path, eyebrow, h1, lede, extra="", banner=True, title=None, banner_l
     write(path, head(path, title, "", True) + header(path) + main + footer())
 
 
-FIN_PRODUCTS = ["SMB Lending", "Purchase Order Financing", "Factoring", "Letters of Credit"]
+FIN_PRODUCTS = [
+    ("SMB Lending", "Working capital for growing businesses, to fund inventory, hiring or expansion."),
+    ("Purchase Order Financing", "Funding to pay suppliers on confirmed customer orders, so you can fill large orders without draining cash."),
+    ("Factoring", "Turn unpaid invoices into cash now instead of waiting on customer payment terms."),
+    ("Letters of Credit", "A bank-backed payment guarantee that gives suppliers, especially overseas, the confidence to ship."),
+]
 fin_tiles = "\n".join(f"""          <article class="tile">
             <p class="tile__n">{i:02d}</p>
             <h3 class="tile__title">{t}</h3>
-          </article>""" for i, t in enumerate(FIN_PRODUCTS, 1))
+            <p class="tile__body">{b}</p>
+          </article>""" for i, (t, b) in enumerate(FIN_PRODUCTS, 1))
 FINANCING_MAIN = f"""
   <main id="page">
     <section class="phero" aria-labelledby="fin-title">
