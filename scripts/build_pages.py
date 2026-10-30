@@ -203,13 +203,13 @@ logos = "\n".join(f'              <img src="/assets/logos/{f}" alt="{a}"{f" clas
 logos_dup = re.sub(r' alt="[^"]*"', ' alt=""', logos)
 
 OFFER = [
-    ("01", "Assess", "Find where AI pays off",
+    ("01", "Assess", "Identify the opportunity",
      "We map where time and money go, rank every opportunity by its return, and agree on the outcomes we'll be measured by.",
      "Animation: opportunities ranked by return"),
-    ("02", "Build", "Build alongside your team",
+    ("02", "Build", "Deploy within your team",
      "We unify your data, then embed with your team to build the agents, workflows and software in your proposal, and stay through adoption.",
      "Animation: agents and apps built on the data layer"),
-    ("03", "Prove", "Measure every result",
+    ("03", "Prove", "Measure the outcome",
      "Every system is measured against the outcomes agreed up front, with a regular scorecard of hours saved, costs cut and insight gained.",
      "Animation: scorecard against the baseline"),
 ]
