@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&amp;family=Red+Hat+Mono:wght@500&amp;family=Spectral:wght@500&amp;display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/v2/site.css?v=46fba0be" />
+  <link rel="stylesheet" href="/v2/site.css?v=57b00739" />
 </head>
 <body>
   <header class="hdr" id="nav">
@@ -66,7 +66,7 @@
   </nav>
 
   <main id="page">
-    <section class="phero">
+    <section class="phero phero--compact">
       <div class="wrap">
         <p class="eyebrow">Work with us</p>
         <h1 class="h-display">Careers</h1>
@@ -77,32 +77,15 @@
       <div class="wrap">
         <form class="jobfilter" data-jobfilter role="search" aria-label="Filter open roles" onsubmit="return false">
           <div class="jobfilter__row">
-            <label class="filter filter--search">
-              <span class="filter__label">Search</span>
-              <input class="filter__input" type="search" name="q" placeholder="Role or keyword" autocomplete="off" />
-            </label>
-          <label class="filter">
-            <span class="filter__label">Team</span>
-            <span class="filter__select"><select name="team"><option value="">All teams</option><option value="engineering">Engineering</option><option value="strategy">Strategy</option><option value="operations">Operations</option></select></span>
-          </label>
-          <label class="filter">
-            <span class="filter__label">Location</span>
-            <span class="filter__select"><select name="location"><option value="">All locations</option><option value="on-site">On site</option><option value="hybrid">Hybrid</option><option value="remote">Remote</option></select></span>
-          </label>
-          <label class="filter">
-            <span class="filter__label">Type</span>
-            <span class="filter__select"><select name="type"><option value="">All types</option><option value="full-time">Full-time</option><option value="contract">Contract</option><option value="internship">Internship</option></select></span>
-          </label>
+            <input class="filter__input filter--search" type="search" name="q" placeholder="Search roles" aria-label="Search roles" autocomplete="off" />
+            <span class="filter__select"><select name="team" aria-label="Team"><option value="">All teams</option><option value="engineering">Engineering</option><option value="strategy">Strategy</option><option value="operations">Operations</option></select></span>
+            <span class="filter__select"><select name="location" aria-label="Location"><option value="">All locations</option><option value="on-site">On site</option><option value="hybrid">Hybrid</option><option value="remote">Remote</option></select></span>
+            <span class="filter__select"><select name="type" aria-label="Type"><option value="">All types</option><option value="full-time">Full-time</option><option value="contract">Contract</option><option value="internship">Internship</option></select></span>
+            <span class="filter__select"><select name="sort" aria-label="Sort by"><option value="newest">Sort: Newest</option><option value="title">Sort: Title A to Z</option></select></span>
           </div>
           <div class="jobfilter__bar">
             <p class="jobfilter__count" role="status" aria-live="polite"><span data-job-count>0</span> open <span data-job-noun>roles</span></p>
-            <div class="jobfilter__actions">
-              <button type="reset" class="jobfilter__reset">Clear filters</button>
-              <label class="filter filter--inline">
-                <span class="filter__label">Sort by</span>
-                <span class="filter__select"><select name="sort"><option value="newest">Newest</option><option value="title">Title A to Z</option></select></span>
-              </label>
-            </div>
+            <button type="reset" class="jobfilter__reset">Clear filters</button>
           </div>
         </form>
         <ul class="jobs" data-jobs aria-label="Open roles"></ul>
