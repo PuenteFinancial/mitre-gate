@@ -495,7 +495,7 @@ SERVICES_MAIN = f"""
       </div>
     </section>
 
-{reach("Get started", "Let's talk about your business.", "Tell us what you're working on. Most engagements start with a two-week assessment.")}
+{reach("Get started", "Let's talk about your business.", "Tell us what you're working on. Most engagements start with an assessment.")}
   </main>
 """
 SERVICES_DESC = "Mitre engineers embed with your team to find where AI pays off, build the systems to capture it, and measure every result."
