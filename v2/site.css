@@ -250,11 +250,11 @@ a { color: var(--ocean); text-decoration: none; }
 .card__chip span { margin-top: 4px; font: 700 10px/12px var(--f-sans); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-muted); }
 .card__panel { position: absolute; z-index: 1; left: 16px; right: 16px; bottom: 16px; max-width: 340px; padding: 18px; border-radius: var(--radius-sm);
   background: var(--glass); backdrop-filter: blur(12px); }
-.card__panel h3 { margin-top: 8px; font: 600 22px/28px var(--f-sans); color: var(--ink); }
+.card__panel h3 { font: 700 20px/26px var(--f-sans); color: var(--blue-800); }
 .card__more { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .4s var(--ease); }
 .card__more > div { overflow: hidden; }
-.card__more p { padding-top: 10px; font: 400 15px/23px var(--f-sans); color: var(--ink-muted); }
-.card__more .btn { margin-top: 14px; }
+.card__more p { padding-top: 8px; font: 400 15px/23px var(--f-sans); color: var(--ink-muted); }
+.card__more .btn { margin-top: 16px; }
 .card:hover .card__more, .card:focus-within .card__more { grid-template-rows: 1fr; }
 @media (hover: none) { .card__more { grid-template-rows: 1fr; } }
 @media (max-width: 960px) {

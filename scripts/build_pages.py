@@ -203,15 +203,15 @@ logos = "\n".join(f'              <img src="/assets/logos/{f}" alt="{a}"{f" clas
 logos_dup = re.sub(r' alt="[^"]*"', ' alt=""', logos)
 
 OFFER = [
-    ("01", "Strategy", "Data Led Strategy",
-     "We interview the people who run each function and measure where time and money go. Every opportunity is scored on value against cost, so your roadmap is ranked by return and priced by the engineers who would build it.",
+    ("01", "Assess", "Find where AI pays off",
+     "We map where time and money go, rank every opportunity by its return, and agree on the outcomes we'll be measured by.",
      "Animation: opportunities ranked by return"),
-    ("02", "Implementation", "Embedded Implementation",
-     "We build the data foundation first, then the agents and applications on top of it, all reading from one current model of your business.",
-     "Animation: one Manifest under every agent"),
-    ("03", "Performance", "Continual Performance Improvement",
-     "Every system is measured against how the work ran before, and tested again with every change. It earns its place by beating that baseline.",
-     "Animation: weekly scores against the baseline"),
+    ("02", "Build", "Build alongside your team",
+     "We unify your data, then embed with your team to build the agents, workflows and software in your proposal, and stay through adoption.",
+     "Animation: agents and apps built on the data layer"),
+    ("03", "Prove", "Measure every result",
+     "Every system is measured against the outcomes agreed up front, with a regular scorecard of hours saved, costs cut and insight gained.",
+     "Animation: scorecard against the baseline"),
 ]
 cards = "\n".join(f"""        <article class="card">
           {ph("anim", anim, "ph--g" if n == "02" else "")}
