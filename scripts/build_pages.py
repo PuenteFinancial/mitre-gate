@@ -415,7 +415,7 @@ SERVICES_MAIN = f"""
     <section class="phero" aria-labelledby="svc-title">
       <div class="wrap">
         <p class="eyebrow">Services</p>
-        <h1 class="h-display" id="svc-title">We build AI inside your business and prove what it's worth.</h1>
+        <h1 class="h-display" id="svc-title">We build AI capabilities into your business and prove what it's worth.</h1>
         <p class="lede">Mitre engineers work alongside your team to find where AI creates real value, build the data and systems to capture it, and measure every result against outcomes we agree on up front.</p>
         <a class="btn btn--primary" href="/contact/">Contact us <span aria-hidden="true">→</span></a>
       </div>
