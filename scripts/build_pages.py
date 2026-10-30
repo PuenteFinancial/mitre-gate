@@ -195,7 +195,7 @@ HOME_MAIN = f"""
     <section class="hero" aria-labelledby="hero-title">
       <div class="wrap">
         <p class="eyebrow">Welcome to Mitre Global</p>
-        <h1 class="h-display" id="hero-title">AI implementation that drives real operational efficiency</h1>
+        <h1 class="h-display" id="hero-title">AI implementation that drives operational and cash efficiency</h1>
       </div>
       <div class="wrap car" data-carousel role="region" aria-roledescription="carousel" aria-label="Featured stories">
         <div class="car__stage">
@@ -311,8 +311,8 @@ def write(path, html):
     out.write_text(html)
 
 
-HOME_DESC = "Mitre embeds engineers in your business to find where AI creates value and build the systems that capture it. AI implementation that drives real operational efficiency."
-write("/", head("/", "Mitre Global | AI implementation that drives real operational efficiency", HOME_DESC, False) + header("/") + HOME_MAIN + footer())
+HOME_DESC = "Mitre embeds engineers in your business to find where AI creates value and build the systems that capture it. AI implementation that drives operational and cash efficiency."
+write("/", head("/", "Mitre Global | AI implementation that drives operational and cash efficiency", HOME_DESC, False) + header("/") + HOME_MAIN + footer())
 
 # ---------------- placeholder subpages ----------------
 def subpage(path, eyebrow, h1, lede, extra="", banner=True, title=None, banner_label="Page content coming soon"):
