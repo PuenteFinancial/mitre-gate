@@ -564,7 +564,7 @@ FINANCING_MAIN = f"""
   </main>
 """
 write("/financing/", head("/financing/", "Financing | Mitre", "", True) + header("/financing/") + FINANCING_MAIN + footer())
-subpage("/industries/", "Industries", "Where we work.", "We embed with operators in six industries. Pick yours to see how we help.",
+subpage("/industries/", "Industries", "Where we work.", "We embed across all of global commerce. Select your industry to see how we help.",
         extra="\n" + pills("Choose an industry"))
 def select(name, label, options, extra=""):
     opts = "".join(f'<option value="{v}">{t}</option>' for v, t in options)
