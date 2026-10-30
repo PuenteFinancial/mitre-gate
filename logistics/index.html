@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&amp;family=Red+Hat+Mono:wght@500&amp;family=Spectral:wght@500&amp;display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/v2/site.css?v=9f8a2139" />
+  <link rel="stylesheet" href="/v2/site.css?v=7f6be471" />
 </head>
 <body>
   <header class="hdr" id="nav">
@@ -66,15 +66,93 @@
   </nav>
 
   <main id="page">
-    <section class="phero">
+    <section class="phero" aria-labelledby="ind-title">
       <div class="wrap">
         <p class="eyebrow">Industries</p>
-        <h1 class="h-display">Logistics</h1>
-        <p class="lede">How Mitre puts AI to work for Logistics. This page is on its way.</p>
+        <h1 class="h-display" id="ind-title">Logistics</h1>
+        <p class="lede">Move more freight with the team you have.</p>
       </div>
     </section>
-    <section class="sec" style="padding-top:0">
-      <div class="wrap"><div class="ph ph--anim phero__ph" role="img" aria-label="Page content coming soon"><span class="ph__label">Page content coming soon</span></div></div>
+    <section class="sec ind" aria-label="About Logistics">
+      <div class="wrap ind__in">
+        <p class="ind__body">For 3PLs, freight forwarders and warehouse operators, every shipment generates documents, updates and exceptions. Quoting, booking, customs paperwork, tracking, billing and customer communication absorb hours that should go to growing accounts. Mitre embeds with your operations team to automate document handling and status updates, catch exceptions before your customers do, and tighten billing so accessorials don't slip through, letting you scale volume without scaling headcount.</p>
+        <p class="phase__label ind__k">Where we help</p>
+        <ul class="tags"><li>Quoting &amp; booking</li><li>Documents &amp; exceptions</li><li>Billing &amp; customer updates</li></ul>
+      </div>
+    </section>
+
+    <section class="sec" id="offering" aria-labelledby="offer-title">
+      <div class="wrap">
+        <div class="sec__head">
+          <div>
+            <h2 class="h-section" id="offer-title">Assess, build, prove.</h2>
+            <p class="lede">We find where AI pays off in your business, build the data pipelines and systems to capture it, and measure every result against agreed outcomes.</p>
+          </div>
+          <a class="more" href="/services/">See our full service</a>
+        </div>
+        <div class="cards">
+        <article class="card">
+          <div class="ph ph--anim" role="img" aria-label="Animation: opportunities ranked by return"><span class="ph__label">Animation: opportunities ranked by return</span></div>
+          <div class="card__chip"><b>01</b><span>Assess</span></div>
+          <div class="card__panel">
+            <h3>Identify the opportunity</h3>
+            <div class="card__more"><div>
+              <p>We map where time and money go, rank every opportunity by its return, and agree on the outcomes we'll be measured by.</p>
+              <a class="btn btn--primary" href="/services/">Our Service <span aria-hidden="true">→</span></a>
+            </div></div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="ph ph--anim ph--g" role="img" aria-label="Animation: agents and apps built on the data layer"><span class="ph__label">Animation: agents and apps built on the data layer</span></div>
+          <div class="card__chip"><b>02</b><span>Build</span></div>
+          <div class="card__panel">
+            <h3>Deploy within your team</h3>
+            <div class="card__more"><div>
+              <p>We unify your data, then embed with your team to build the agents, workflows and software in your proposal, and stay through adoption.</p>
+              <a class="btn btn--primary" href="/services/">Our Service <span aria-hidden="true">→</span></a>
+            </div></div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="ph ph--anim" role="img" aria-label="Animation: scorecard against the baseline"><span class="ph__label">Animation: scorecard against the baseline</span></div>
+          <div class="card__chip"><b>03</b><span>Prove</span></div>
+          <div class="card__panel">
+            <h3>Measure the outcome</h3>
+            <div class="card__more"><div>
+              <p>Every system is measured against the outcomes agreed up front, with a regular scorecard of hours saved, costs cut and insight gained.</p>
+              <a class="btn btn--primary" href="/services/">Our Service <span aria-hidden="true">→</span></a>
+            </div></div>
+          </div>
+        </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="reach" id="contact" aria-labelledby="reach-title">
+      <div class="wrap reach__in">
+        <div class="reach__txt">
+          <p class="eyebrow">Contact us</p>
+          <h2 class="h-section" id="reach-title">Ready to engage with Mitre?</h2>
+          <p class="lede">Tell us what you're working on. A real person reads every note.</p>
+          <p class="reach__alt">Prefer email? <a class="reach__mail" href="mailto:info@mitregate.com">info@mitregate.com</a></p>
+        </div>
+        <form class="form" data-placeholder="form" novalidate>
+          <div class="form__row">
+            <label class="field"><span class="field__label">Name</span>
+              <input class="field__input" name="name" autocomplete="name" required></label>
+            <label class="field"><span class="field__label">Company</span>
+              <input class="field__input" name="company" autocomplete="organization" required></label>
+          </div>
+          <label class="field"><span class="field__label">Work email</span>
+            <input class="field__input" type="email" name="email" autocomplete="email" required></label>
+          <label class="field"><span class="field__label">How can we help?</span>
+            <textarea class="field__input field__input--area" name="message" rows="5" required></textarea></label>
+          <div class="form__foot">
+            <button class="btn btn--primary" type="submit">Send <span aria-hidden="true">→</span></button>
+            <p class="form__status" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+      </div>
     </section>
   </main>
 

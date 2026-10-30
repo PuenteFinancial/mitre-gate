@@ -505,3 +505,11 @@ a { color: var(--ocean); text-decoration: none; }
   *, *::before, *::after { transition-duration: 0s !important; transition-delay: 0s !important; }
   .phases.is-tabs .phase.is-active { animation: none; }
 }
+
+/* Industry pages: one reading column under the page header */
+.ind { padding-top: 40px; }
+.ind__in { max-width: 40rem; }
+.ind__body { font: 400 17px/28px var(--f-sans); color: var(--ink-muted); }
+.ind__k { margin-top: 32px; }
+.ind .tags { margin-top: 12px; }
+.phero--end { padding-bottom: var(--section-y); }
