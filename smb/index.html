@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&amp;family=Red+Hat+Mono:wght@500&amp;family=Spectral:wght@500&amp;display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/v2/site.css?v=c217966e" />
+  <link rel="stylesheet" href="/v2/site.css?v=62d42024" />
 </head>
 <body>
   <header class="hdr" id="nav">
@@ -172,7 +172,7 @@
           <p class="lede">Tell us what you're working on. A real person reads every note.</p>
           <p class="reach__alt">Prefer email? <a class="reach__mail" href="mailto:info@mitre.global">info@mitre.global</a></p>
         </div>
-        <form class="form" data-placeholder="form" novalidate>
+        <form class="form" data-lead-form="https://script.google.com/macros/s/AKfycbzndSovCUsRlUzlvAE9N_1Qu8-oQ8eQlys31hT71fkJ3C6FxKIMhEebZtipMYPrRMc/exec" novalidate>
           <div class="form__row">
             <label class="field"><span class="field__label">Name</span>
               <input class="field__input" name="name" autocomplete="name" required></label>
@@ -181,8 +181,9 @@
           </div>
           <label class="field"><span class="field__label">Work email</span>
             <input class="field__input" type="email" name="email" autocomplete="email" required></label>
-          <label class="field"><span class="field__label">How can we help?</span>
-            <textarea class="field__input field__input--area" name="message" rows="5" required></textarea></label>
+          <label class="field"><span class="field__label">How can we help? <span class="field__opt">(optional)</span></span>
+            <textarea class="field__input field__input--area" name="message" rows="5"></textarea></label>
+          <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
           <div class="form__foot">
             <button class="btn btn--primary" type="submit">Send <span aria-hidden="true">→</span></button>
             <p class="form__status" role="status" aria-live="polite"></p>
@@ -217,6 +218,6 @@
       </div>
     </div>
   </footer>
-  <script src="/v2/site.js?v=f9eec6c3"></script>
+  <script src="/v2/site.js?v=ba3729e0"></script>
 </body>
 </html>

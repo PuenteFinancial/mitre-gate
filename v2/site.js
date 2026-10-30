@@ -33,11 +33,11 @@
       e.preventDefault();
       var bad = null;
       f.querySelectorAll(".field__input").forEach(function (el) {
-        var ok = el.checkValidity() && el.value.trim() !== "";
+        var ok = el.checkValidity() && (!el.required || el.value.trim() !== "");
         el.setAttribute("aria-invalid", String(!ok));
         if (!ok && !bad) bad = el;
       });
-      if (bad) { status.textContent = "Please fill in every field with a valid email."; bad.focus(); return; }
+      if (bad) { status.textContent = "Please add your name, company and a valid work email."; bad.focus(); return; }
       var btn = f.querySelector('button[type="submit"]');
       var fail = "Sorry, that didn't send. Please email info@mitre.global instead.";
       var data = {};
@@ -54,7 +54,7 @@
         .catch(function () { status.textContent = fail; })
         .then(function () { btn.disabled = false; });
     });
-    f.addEventListener("input", function (e) { if (e.target.getAttribute("aria-invalid") === "true" && e.target.checkValidity() && e.target.value.trim()) e.target.setAttribute("aria-invalid", "false"); });
+    f.addEventListener("input", function (e) { if (e.target.getAttribute("aria-invalid") === "true" && e.target.checkValidity() && (!e.target.required || e.target.value.trim())) e.target.setAttribute("aria-invalid", "false"); });
   });
 
   // ---------- services phase stepper ----------
