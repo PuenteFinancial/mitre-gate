@@ -26,8 +26,8 @@
     a.addEventListener("click", function (e) { e.preventDefault(); });
   });
 
-  // Contact form: validates on the page but sends nothing until a backend is hooked up
-  document.querySelectorAll('form[data-placeholder="form"]').forEach(function (f) {
+  // Contact form: validates on the page, then posts to a Google Apps Script that logs the lead to a Sheet and emails it
+  document.querySelectorAll('form[data-lead-form]').forEach(function (f) {
     var status = f.querySelector(".form__status");
     f.addEventListener("submit", function (e) {
       e.preventDefault();
@@ -38,7 +38,21 @@
         if (!ok && !bad) bad = el;
       });
       if (bad) { status.textContent = "Please fill in every field with a valid email."; bad.focus(); return; }
-      status.textContent = "This form isn't connected yet. Please email info@mitre.global for now.";
+      var btn = f.querySelector('button[type="submit"]');
+      var fail = "Sorry, that didn't send. Please email info@mitre.global instead.";
+      var data = {};
+      new FormData(f).forEach(function (v, k) { data[k] = v; });
+      btn.disabled = true;
+      status.textContent = "Sending…";
+      // text/plain keeps this a "simple" request, so no CORS preflight (Apps Script can't answer one)
+      fetch(f.dataset.leadForm, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(data) })
+        .then(function (r) { return r.json(); })
+        .then(function (r) {
+          if (r.ok) { f.reset(); status.textContent = "Thanks, we got it. We'll be in touch soon."; }
+          else status.textContent = fail;
+        })
+        .catch(function () { status.textContent = fail; })
+        .then(function () { btn.disabled = false; });
     });
     f.addEventListener("input", function (e) { if (e.target.getAttribute("aria-invalid") === "true" && e.target.checkValidity() && e.target.value.trim()) e.target.setAttribute("aria-invalid", "false"); });
   });
