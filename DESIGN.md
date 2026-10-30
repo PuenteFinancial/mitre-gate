@@ -85,7 +85,8 @@ Live on the homepage now:
   rounded visual on the right.
 - **Split** (`.split`): a wide photo on the left, eyebrow, headline, lede and button on the right.
 - **Contact band** (`.reach`): full-width dark blue band. Eyebrow, headline, lede and a "Prefer
-  email?" link on the left; a contact form card on the right (stacks under 860px).
+  email?" link on the left; a contact form card on the right (stacks under 860px). Built by
+  `reach(eyebrow, headline, lede)` in the builder, so every page that ends with it shares one source.
 - **Form** (`.form`, `.field`, `.field__label`, `.field__input`): cream `--paper-raised` card,
   uppercase 12px labels in `--blue-800`, 46px inputs on `--paper` with a `--blue-200` border and a
   blue focus ring. Invalid fields get `aria-invalid="true"` and the `--error` border. Status text
@@ -94,6 +95,28 @@ Live on the homepage now:
 
 - **Badge** (`.badge`): small dark-blue pill with a pulsing green dot (`.badge__dot`), placed beside an
   eyebrow wrapped in `.eyebrow--row`. For status callouts like "Coming soon". The pulse stops with reduced motion.
+
+Services page (`/services/`):
+
+- **Value tiles** (`.tiles` / `.tile`): three equal quiet cards on `--paper-raised` with a `--stone`
+  hairline and `--radius-md`. A mono number in `--forest`, a Manrope 700 title in `--blue-800`, body in
+  `--ink-muted`. No images. They stack under 860px.
+- **Compact feature** (`.feature--compact`): the green feature band with 60% of the section padding,
+  a narrower text column and a shorter 16:9 visual. A spotlight on one idea, usually with no button.
+- **Phase stepper** (`.phases`, `data-phases`): the page's centerpiece. On screens 861px and wider,
+  `site.js` turns it into ARIA tabs: a pill-bar tablist (mono numbers, uppercase names, active tab
+  filled `--ocean`) over one panel, arrow keys / Home / End, and Previous / Next buttons. Panels
+  crossfade (0.25s, off under reduced motion). Each panel (`.phase`) is a two-column card: mono label
+  (`Phase 01 · Assess`), Spectral title, description, keyword chips (`.tags`, mono on `--blue-50`), an
+  optional deliverable line in `--forest` (`.phase__deliv`) and `.more` link, with a 4:3 visual on the
+  right. A panel can hold two **path cards** (`.paths` / `.path`) instead of chips and a visual. Under
+  861px and without JS, every phase is stacked and visible (visuals hidden on phones); the tablist
+  and nav carry `hidden`, which the CSS respects.
+- **Ownership band** (`.promo--page`): the promo card with no logo row and no button, on its own in a
+  section. A light green eyebrow (`.promo__card .eyebrow`) sits above the headline.
+- **FAQ** (`.faq` / `.faq__item`): native `<details>`/`<summary>`, single column up to 800px, `--stone`
+  hairlines between items. Questions in Manrope 600 `--blue-800`; a drawn `+` that turns to `−` when
+  open; answers in `--ink-muted`. All start closed.
 
 - **Footer** (`.foot`): light, with a serif tagline ("Level up through AI transformation."), a
   two-column nav, and a "How can we help?" block with a Contact button. The bottom row holds the
@@ -104,7 +127,7 @@ Removed 2026-10-29: the careers band (`.careers`), markup and CSS in `git show a
 Also styled but not on any page: **duo cards** (`.duo`), two tall image cards with a dark gradient, a serif headline and a light button. Removed from
 the homepage 2026-10-29; markup in `git show b91eac5:index.html`.
 
-Placeholder subpages use `.phero` (centered eyebrow, display title and lede) plus a wide
+Services is built out (see above). The remaining placeholder subpages use `.phero` (centered eyebrow, display title and lede) plus a wide
 `.phero__ph` placeholder block.
 
 ## Placeholders

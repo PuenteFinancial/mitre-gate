@@ -133,6 +133,36 @@ def pills(label="Industries"):
       </nav>"""
 
 
+def reach(eyebrow, h2, lede):
+    """Dark blue contact band with the contact form. One source for every page that ends with it."""
+    return f"""    <section class="reach" id="contact" aria-labelledby="reach-title">
+      <div class="wrap reach__in">
+        <div class="reach__txt">
+          <p class="eyebrow">{eyebrow}</p>
+          <h2 class="h-section" id="reach-title">{h2}</h2>
+          <p class="lede">{lede}</p>
+          <p class="reach__alt">Prefer email? <a class="reach__mail" href="mailto:{MAIL}">{MAIL}</a></p>
+        </div>
+        <form class="form" data-placeholder="form" novalidate>
+          <div class="form__row">
+            <label class="field"><span class="field__label">Name</span>
+              <input class="field__input" name="name" autocomplete="name" required></label>
+            <label class="field"><span class="field__label">Company</span>
+              <input class="field__input" name="company" autocomplete="organization" required></label>
+          </div>
+          <label class="field"><span class="field__label">Work email</span>
+            <input class="field__input" type="email" name="email" autocomplete="email" required></label>
+          <label class="field"><span class="field__label">How can we help?</span>
+            <textarea class="field__input field__input--area" name="message" rows="5" required></textarea></label>
+          <div class="form__foot">
+            <button class="btn btn--primary" type="submit">Send <span aria-hidden="true">→</span></button>
+            <p class="form__status" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+      </div>
+    </section>"""
+
+
 # ---------------- homepage ----------------
 SLIDE_TONES = ["", "ph--g", "ph--dark", "ph--mix", "", "ph--g"]
 slides = []
@@ -275,32 +305,7 @@ HOME_MAIN = f"""
       </div>
     </section>
 
-    <section class="reach" id="contact" aria-labelledby="reach-title">
-      <div class="wrap reach__in">
-        <div class="reach__txt">
-          <p class="eyebrow">Contact us</p>
-          <h2 class="h-section" id="reach-title">Ready to engage with Mitre?</h2>
-          <p class="lede">Tell us what you're working on. A real person reads every note.</p>
-          <p class="reach__alt">Prefer email? <a class="reach__mail" href="mailto:{MAIL}">{MAIL}</a></p>
-        </div>
-        <form class="form" data-placeholder="form" novalidate>
-          <div class="form__row">
-            <label class="field"><span class="field__label">Name</span>
-              <input class="field__input" name="name" autocomplete="name" required></label>
-            <label class="field"><span class="field__label">Company</span>
-              <input class="field__input" name="company" autocomplete="organization" required></label>
-          </div>
-          <label class="field"><span class="field__label">Work email</span>
-            <input class="field__input" type="email" name="email" autocomplete="email" required></label>
-          <label class="field"><span class="field__label">How can we help?</span>
-            <textarea class="field__input field__input--area" name="message" rows="5" required></textarea></label>
-          <div class="form__foot">
-            <button class="btn btn--primary" type="submit">Send <span aria-hidden="true">→</span></button>
-            <p class="form__status" role="status" aria-live="polite"></p>
-          </div>
-        </form>
-      </div>
-    </section>
+{reach("Contact us", "Ready to engage with Mitre?", "Tell us what you're working on. A real person reads every note.")}
   </main>
 """
 
@@ -313,6 +318,188 @@ def write(path, html):
 
 HOME_DESC = "Mitre embeds engineers in your business to find where AI creates value and build the systems that capture it. AI implementation that drives operational and cash efficiency."
 write("/", head("/", "Mitre Global | AI implementation that drives operational and cash efficiency", HOME_DESC, False) + header("/") + HOME_MAIN + footer())
+
+# ---------------- services ----------------
+TILES = [
+    ("01", "Lower your costs",
+     "Cut manual hours and retire tools you've outgrown. We replace rented software with systems you own, so you run leaner with fewer vendors."),
+    ("02", "Focus on your core",
+     "We streamline your operations and communications and remove the busywork that pulls your team away from what makes you win: the brand, the deals, the job itself."),
+    ("03", "Unlock insight from your data",
+     "Your data is spread across a dozen tools, and some of it isn't captured at all. We unify it and fill the gaps, turning it into insight your operators and your AI can act on."),
+]
+tiles = "\n".join(f"""          <article class="tile">
+            <p class="tile__n">{n}</p>
+            <h3 class="tile__title">{t}</h3>
+            <p class="tile__body">{b}</p>
+          </article>""" for n, t, b in TILES)
+
+# (number, short name, title, description, tags, deliverable, link, animation label)
+PHASES = [
+    ("01", "Assess", "Find where AI pays off",
+     "In two weeks, we connect to your data, sit down with the people who run each function, and map where time and money go. We rank every opportunity by its impact against the cost to build it, and agree on the outcomes we'll be measured by.",
+     ["Connect data", "Team interviews", "Rank by return", "Set outcomes", "Proposal"],
+     "You leave with a ranked roadmap and a proposal, before any long-term commitment.",
+     ("Start with an assessment", "/contact/"),
+     "Animation: opportunities ranked by return"),
+    ("02", "Unify", "Build your data layer",
+     "We pull the data spread across your tools and workflows into one unified data layer, enrich it with context, and start capturing what isn't tracked today. It becomes the single source of truth for your team and every system we build on top of it.",
+     ["Consolidate", "Enrich", "Capture new sources", "Single source of truth"], None, None,
+     "Animation: scattered sources flowing into one data layer"),
+    ("03", "Build", "Deploy alongside your team",
+     "Our engineers embed with your team, in person wherever we can, to build the agents, workflows, software and reporting agreed in your proposal. We stay through adoption, so the new systems become part of how your team works.",
+     ["AI agents", "Workflows", "Custom software", "Reporting", "Adoption"], None, None,
+     "Animation: agents and apps built on the data layer"),
+    ("04", "Prove", "Measure against the outcomes",
+     "Every system is measured against the outcomes set in Phase 01. You get a regular scorecard, on a cadence that fits your business, showing hours saved, costs cut and insight gained.",
+     ["Benchmark", "Scorecard", "Cost savings", "Time saved", "New insight"], None, None,
+     "Animation: scorecard against the baseline"),
+    ("05", "Run", "Choose how we continue",
+     "When the work is proven, you choose what comes next.",
+     None, None, None, None),
+]
+PATHS = [
+    ("Your team runs it.", "We hand over the systems, code and documentation, and train your team to run and extend them."),
+    ("We run it with you.", "We keep operating and improving what we built, and take on the next opportunities on your roadmap."),
+]
+
+
+def phase_panel(n, name, title, desc, tags, deliv, link, anim):
+    extra = ""
+    if tags:
+        chips = "".join(f"<li>{t}</li>" for t in tags)
+        extra += f'\n              <ul class="tags" aria-label="What this phase covers">{chips}</ul>'
+    if deliv:
+        extra += f'\n              <p class="phase__deliv">{deliv}</p>'
+    if link:
+        extra += f'\n              <a class="more phase__link" href="{link[1]}">{link[0]}</a>'
+    if anim:
+        side = ph("anim", anim, "phase__vis")
+    else:
+        cards = "\n".join(f"""              <div class="path">
+                <h4 class="path__title">{t}</h4>
+                <p>{b}</p>
+              </div>""" for t, b in PATHS)
+        side = f'<div class="paths">\n{cards}\n            </div>'
+    return f"""          <section class="phase" id="phase-{n}" aria-labelledby="phase-{n}-title">
+            <div class="phase__txt">
+              <p class="phase__label">Phase {n} · {name}</p>
+              <h3 class="phase__title" id="phase-{n}-title">{title}</h3>
+              <p class="phase__desc">{desc}</p>{extra}
+            </div>
+            {side}
+          </section>"""
+
+
+phase_tabs = "\n".join(
+    f'            <button type="button" class="phases__tab" role="tab" id="phase-{n}-tab" aria-controls="phase-{n}">'
+    f'<span class="phases__n">{n}</span> {name}</button>'
+    for n, name, *_ in PHASES)
+phase_panels = "\n".join(phase_panel(*ph_) for ph_ in PHASES)
+
+FAQ = [
+    ("How does an engagement start?", "With a two-week assessment that ends in a ranked roadmap and a proposal. There's no long-term commitment until you've seen it."),
+    ("How is Mitre paid?", "Our fees are tied to the value we create and earned as we deliver, not paid all up front. We'll walk through specifics on a call."),
+    ("How do you handle our data?", "We work inside your systems with the access our agreement defines, and we hold to the security standards your industry expects."),
+    ("Do we have to replace our current tools?", "No. We connect to what you already use. Where custom software would serve you better than a tool you're paying for, we'll show you the math."),
+    ("Do you work on site?", "Yes, wherever we can. Our engineers embed with your team in person and work remotely when that serves the project better."),
+    ("Which AI models do you use?", "Whichever fit the job and your preferences. We're model-agnostic, and nothing we build locks you into one provider."),
+]
+faq = "\n".join(f"""          <details class="faq__item">
+            <summary class="faq__q">{q}<span class="faq__icon" aria-hidden="true"></span></summary>
+            <p class="faq__a">{a}</p>
+          </details>""" for q, a in FAQ)
+
+SERVICES_MAIN = f"""
+  <main id="page">
+    <section class="phero" aria-labelledby="svc-title">
+      <div class="wrap">
+        <p class="eyebrow">Services</p>
+        <h1 class="h-display" id="svc-title">We build AI inside your business and prove what it's worth.</h1>
+        <p class="lede">Mitre engineers work alongside your team to find where AI creates real value, build the data and systems to capture it, and measure every result against outcomes we agree on up front.</p>
+        <a class="btn btn--primary" href="/contact/">Contact us <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="deliver-title">
+      <div class="wrap">
+        <div class="sec__head">
+          <div>
+            <p class="eyebrow">What we deliver</p>
+            <h2 class="h-section" id="deliver-title">Value you can measure.</h2>
+          </div>
+        </div>
+        <div class="tiles">
+{tiles}
+        </div>
+      </div>
+    </section>
+
+    <section class="feature feature--compact" aria-labelledby="saas-title">
+      <div class="wrap feature__in">
+        <div>
+          <p class="eyebrow">Own your software</p>
+          <h2 class="h-section" id="saas-title">Shrink your vendor stack.</h2>
+          <p class="lede">Many of the tools you pay for every month can be replaced with custom software built around how you actually work. You own it outright and stop paying for seats and features you don't use.</p>
+        </div>
+        {ph("anim", "Animation placeholder: vendor tools consolidating into one owned system", "ph--g feature__vis")}
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="engage-title">
+      <div class="wrap">
+        <div class="sec__head">
+          <div>
+            <p class="eyebrow">How we engage</p>
+            <h2 class="h-section" id="engage-title">From first look to lasting results.</h2>
+            <p class="lede">Every engagement follows the same path. Each phase builds on the last, and nothing moves forward without your sign-off.</p>
+          </div>
+        </div>
+        <div class="phases" data-phases>
+          <div class="phases__tabs" role="tablist" aria-label="Engagement phases" hidden>
+{phase_tabs}
+          </div>
+          <div class="phases__panels">
+{phase_panels}
+          </div>
+          <div class="phases__nav" hidden>
+            <button type="button" class="btn btn--outline" data-phase-prev><span aria-hidden="true">←</span> Previous</button>
+            <button type="button" class="btn btn--primary" data-phase-next>Next <span aria-hidden="true">→</span></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap promo promo--page" aria-labelledby="own-title">
+      <div class="promo__card">
+        <div class="promo__bg" aria-hidden="true"></div>
+        <div>
+          <p class="eyebrow">Yours, outright</p>
+          <h2 id="own-title">You own everything we build.</h2>
+        </div>
+        <p>The code, data, products and processes are yours from day one, whether we hand off or keep working together. We're model-agnostic, so everything runs on the AI models and tools already operating within your company. Your data stays secure. We work inside your environments.</p>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="faq-title">
+      <div class="wrap">
+        <div class="sec__head">
+          <div>
+            <p class="eyebrow">FAQ</p>
+            <h2 class="h-section" id="faq-title">Common questions.</h2>
+          </div>
+        </div>
+        <div class="faq">
+{faq}
+        </div>
+      </div>
+    </section>
+
+{reach("Get started", "Let's talk about your business.", "Tell us what you're working on. Most engagements start with a two-week assessment.")}
+  </main>
+"""
+SERVICES_DESC = "Mitre engineers embed with your team to find where AI pays off, build the systems to capture it, and measure every result."
+write("/services/", head("/services/", "Services | Mitre", SERVICES_DESC, False) + header("/services/") + SERVICES_MAIN + footer())
 
 # ---------------- placeholder subpages ----------------
 def subpage(path, eyebrow, h1, lede, extra="", banner=True, title=None, banner_label="Page content coming soon"):
@@ -334,7 +521,6 @@ def subpage(path, eyebrow, h1, lede, extra="", banner=True, title=None, banner_l
     write(path, head(path, title, "", True) + header(path) + main + footer())
 
 
-subpage("/services/", "Services", "Services", "What we build with you, and how we work. This page is on its way.")
 subpage("/financing/", "Financing", "Financing", "How we make the work easy to fund. This page is on its way.")
 subpage("/industries/", "Industries", "Where we work.", "We embed with operators in six industries. Pick yours to see how we help.",
         extra="\n" + pills("Choose an industry"))

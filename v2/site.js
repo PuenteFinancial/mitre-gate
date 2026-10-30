@@ -43,6 +43,62 @@
     f.addEventListener("input", function (e) { if (e.target.getAttribute("aria-invalid") === "true" && e.target.checkValidity() && e.target.value.trim()) e.target.setAttribute("aria-invalid", "false"); });
   });
 
+  // ---------- services phase stepper ----------
+  // Without JS (and under 861px) every phase is stacked and visible. On wide screens this turns the
+  // stack into ARIA tabs over one panel, with arrow keys and previous/next buttons.
+  document.querySelectorAll("[data-phases]").forEach(function (root) {
+    var list = root.querySelector('[role="tablist"]');
+    var tabs = [].slice.call(list.querySelectorAll('[role="tab"]'));
+    var panels = tabs.map(function (t) { return document.getElementById(t.getAttribute("aria-controls")); });
+    var nav = root.querySelector(".phases__nav");
+    var prev = root.querySelector("[data-phase-prev]"), next = root.querySelector("[data-phase-next]");
+    var wide = matchMedia("(min-width: 861px)");
+    var active = 0;
+
+    function select(i, focus) {
+      active = (i + tabs.length) % tabs.length;
+      tabs.forEach(function (t, k) {
+        var on = k === active;
+        t.setAttribute("aria-selected", String(on));
+        t.tabIndex = on ? 0 : -1;
+        panels[k].classList.toggle("is-active", on);
+      });
+      prev.disabled = active === 0;
+      next.disabled = active === tabs.length - 1;
+      if (focus) tabs[active].focus();
+    }
+    function setMode() {
+      var on = wide.matches;
+      root.classList.toggle("is-tabs", on);
+      list.hidden = !on;
+      nav.hidden = !on;
+      panels.forEach(function (p, k) {
+        if (on) {
+          p.setAttribute("role", "tabpanel");
+          p.setAttribute("aria-labelledby", tabs[k].id);
+          p.tabIndex = 0;
+        } else {
+          p.removeAttribute("role");
+          p.setAttribute("aria-labelledby", p.id + "-title");
+          p.removeAttribute("tabindex");
+        }
+      });
+      select(active, false);
+    }
+
+    tabs.forEach(function (t, k) { t.addEventListener("click", function () { select(k, false); }); });
+    list.addEventListener("keydown", function (e) {
+      var k = { ArrowRight: active + 1, ArrowLeft: active - 1, Home: 0, End: tabs.length - 1 }[e.key];
+      if (k == null) return;
+      e.preventDefault();
+      select(k, true);
+    });
+    prev.addEventListener("click", function () { select(active - 1, false); });
+    next.addEventListener("click", function () { select(active + 1, false); });
+    if (wide.addEventListener) wide.addEventListener("change", setMode); else wide.addListener(setMode);
+    setMode();
+  });
+
   // ---------- carousel ----------
   // Every slide sits at the stage's center and is shifted by its distance from the active one.
   // The active photo is full size; neighbors step down small, medium, then full again at the edges.
