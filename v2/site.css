@@ -144,7 +144,8 @@ a { color: var(--ocean); text-decoration: none; }
 /* ---------- hero ---------- */
 .hero { padding-top: 136px; text-align: center; }
 .hero .eyebrow { color: var(--ink); }
-.hero h1 { margin: 14px auto 0; max-width: 26ch; }
+.hero h1 { margin: 14px auto 0; max-width: none; text-wrap: initial; }
+@media (max-width: 720px) { .hero h1 { max-width: 20ch; text-wrap: balance; } .br-wide { display: none; } }
 
 /* carousel: the center photo is featured; the rest step down in size by distance */
 .car { margin-top: 40px; }

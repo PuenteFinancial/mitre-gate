@@ -195,7 +195,7 @@ HOME_MAIN = f"""
     <section class="hero" aria-labelledby="hero-title">
       <div class="wrap">
         <p class="eyebrow">Welcome to Mitre Global</p>
-        <h1 class="h-display" id="hero-title">AI implementation that drives operational and cash efficiency</h1>
+        <h1 class="h-display" id="hero-title">AI implementation that drives <br class="br-wide" />operational and cash efficiency</h1>
       </div>
       <div class="wrap car" data-carousel role="region" aria-roledescription="carousel" aria-label="Featured stories">
         <div class="car__stage">
