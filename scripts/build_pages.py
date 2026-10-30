@@ -14,7 +14,7 @@ INDUSTRIES = [("/consumer-goods/", "Consumer Goods"), ("/wholesale-distribution/
               ("/logistics/", "Logistics"), ("/supply-chain/", "Supply Chain"), ("/specialty-finance/", "Specialty Finance"),
               ("/smb/", "SMB")]
 IND_PATHS = {p for p, _ in INDUSTRIES}
-MAIL = "info@mitregate.com"
+MAIL = "info@mitre.global"
 
 
 def cur(href, path):
@@ -30,11 +30,11 @@ def head(path, title, desc, noindex):
   <meta charset="UTF-8" />{robots}
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{title}</title>
-  <link rel="canonical" href="https://mitregate.com{path}" />{d}
+  <link rel="canonical" href="https://mitre.global{path}" />{d}
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Mitre" />
   <meta property="og:title" content="{title}" />
-  <meta property="og:url" content="https://mitregate.com{path}" />
+  <meta property="og:url" content="https://mitre.global{path}" />
   <meta name="twitter:card" content="summary" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg?v={ver('favicon.svg')}" />
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v={ver('favicon-32.png')}" />

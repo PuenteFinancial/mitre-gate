@@ -38,7 +38,7 @@
         if (!ok && !bad) bad = el;
       });
       if (bad) { status.textContent = "Please fill in every field with a valid email."; bad.focus(); return; }
-      status.textContent = "This form isn't connected yet. Please email info@mitregate.com for now.";
+      status.textContent = "This form isn't connected yet. Please email info@mitre.global for now.";
     });
     f.addEventListener("input", function (e) { if (e.target.getAttribute("aria-invalid") === "true" && e.target.checkValidity() && e.target.value.trim()) e.target.setAttribute("aria-invalid", "false"); });
   });

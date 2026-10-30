@@ -1,6 +1,6 @@
 # Mitre site design language
 
-The house style for mitregate.com. New sections and pages should be built from what is here,
+The house style for mitre.global. New sections and pages should be built from what is here,
 so the site stays one consistent thing. The layout is modeled on bcg.com's homepage (used with
 permission): floating-island header, a center-weighted photo carousel, rounded cards on warm
 paper. The colors and copy are Mitre's own.
