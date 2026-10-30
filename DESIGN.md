@@ -98,6 +98,11 @@ Live on the homepage now:
 
 Services page (`/services/`):
 
+- **Photo hero** (`.phero--photo` / `.phero__box`): the page hero boxed in a rounded `--radius-lg` card
+  inside `.wrap` (not edge to edge), with a cover photo (`.phero__bg`, decorative `alt=""`) under a soft
+  `--blue-800` overlay. Text turns light: green eyebrow, cream headline, `--blue-100` lede, `.btn--light`.
+  Services uses the water photo (`assets/photos/water.jpg`).
+
 - **Value tiles** (`.tiles` / `.tile`): three equal quiet cards on `--paper-raised` with a `--stone`
   hairline and `--radius-md`. A mono number in `--forest`, a Manrope 700 title in `--blue-800`, body in
   `--ink-muted`. No images. They stack under 860px.

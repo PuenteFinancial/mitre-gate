@@ -412,12 +412,15 @@ faq = "\n".join(f"""          <details class="faq__item">
 
 SERVICES_MAIN = f"""
   <main id="page">
-    <section class="phero" aria-labelledby="svc-title">
+    <section class="phero phero--photo" aria-labelledby="svc-title">
       <div class="wrap">
+       <div class="phero__box">
+        <img class="phero__bg" src="/assets/photos/water.jpg?v={ver("assets/photos/water.jpg")}" alt="" width="2000" height="1125" fetchpriority="high" decoding="async" />
         <p class="eyebrow">Services</p>
         <h1 class="h-display" id="svc-title">We build AI capabilities into your business and prove what it's worth.</h1>
         <p class="lede">Mitre engineers work alongside your team to find where AI creates real value, build the data and systems to capture it, and measure every result against outcomes we agree on up front.</p>
-        <a class="btn btn--primary" href="/contact/">Contact us <span aria-hidden="true">→</span></a>
+        <a class="btn btn--light" href="/contact/">Contact us <span aria-hidden="true">→</span></a>
+       </div>
       </div>
     </section>
 
