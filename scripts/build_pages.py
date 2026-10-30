@@ -15,6 +15,8 @@ INDUSTRIES = [("/consumer-goods/", "Consumer Goods"), ("/wholesale-distribution/
               ("/smb/", "SMB")]
 IND_PATHS = {p for p, _ in INDUSTRIES}
 MAIL = "info@mitre.global"
+# Google Apps Script web app behind every contact form: adds the lead to a Google Sheet and emails it
+LEAD_URL = "https://script.google.com/macros/s/AKfycbzndSovCUsRlUzlvAE9N_1Qu8-oQ8eQlys31hT71fkJ3C6FxKIMhEebZtipMYPrRMc/exec"
 
 
 def cur(href, path):
@@ -134,8 +136,9 @@ def pills(label="Industries"):
 
 
 def contact_form():
-    """The contact form (name, company, work email, message). Validates on the page; no backend yet."""
-    return """        <form class="form" data-placeholder="form" novalidate>
+    """The contact form (name, company and work email required; message optional). site.js validates it,
+    then posts it to LEAD_URL. The hidden "website" field is a honeypot for spam bots."""
+    return f"""        <form class="form" data-lead-form="{LEAD_URL}" novalidate>
           <div class="form__row">
             <label class="field"><span class="field__label">Name</span>
               <input class="field__input" name="name" autocomplete="name" required></label>
@@ -144,14 +147,14 @@ def contact_form():
           </div>
           <label class="field"><span class="field__label">Work email</span>
             <input class="field__input" type="email" name="email" autocomplete="email" required></label>
-          <label class="field"><span class="field__label">How can we help?</span>
-            <textarea class="field__input field__input--area" name="message" rows="5" required></textarea></label>
+          <label class="field"><span class="field__label">How can we help? <span class="field__opt">(optional)</span></span>
+            <textarea class="field__input field__input--area" name="message" rows="5"></textarea></label>
+          <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
           <div class="form__foot">
             <button class="btn btn--primary" type="submit">Send <span aria-hidden="true">→</span></button>
             <p class="form__status" role="status" aria-live="polite"></p>
           </div>
         </form>"""
-
 
 def reach(eyebrow, h2, lede):
     """Dark blue contact band with the contact form. One source for every page that ends with it."""
