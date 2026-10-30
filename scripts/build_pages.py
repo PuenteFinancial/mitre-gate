@@ -695,6 +695,7 @@ def industry_page(path, name):
             <ul class="tags">{chips}</ul>
           </div>
         </div>
+        <p class="ind__cta"><a class="btn btn--primary" href="/services/">Our service <span aria-hidden="true">→</span></a></p>
       </div>
     </section>
 

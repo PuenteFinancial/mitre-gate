@@ -509,13 +509,14 @@ a { color: var(--ocean); text-decoration: none; }
 }
 
 /* Industry pages: the paragraph and "Where we help" tags on the dark blue promo gradient (as on the Contact panel) */
-.ind { padding-top: 40px; }
+.ind { padding: 40px 0 16px; } /* the next section brings its own top padding */
 .ind__panel { position: relative; overflow: hidden; isolation: isolate; display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
   gap: 32px 64px; align-items: start; max-width: 72rem; margin: 0 auto; padding: clamp(28px, 4vw, 56px);
   border-radius: var(--radius-lg); background: var(--blue-800); color: var(--paper); }
 .ind__panel .promo__bg { z-index: -1; }
 .ind__body { font: 400 17px/28px var(--f-sans); color: var(--blue-100); }
 .ind__panel .phase__label { color: var(--green-200); }
+.ind__cta { margin-top: 40px; text-align: center; }
 .ind .tags { flex-direction: column; align-items: flex-start; margin-top: 14px; }
 .ind .tags li { background: var(--paper-raised); }
 @media (max-width: 860px) { .ind__panel { grid-template-columns: minmax(0, 1fr); } }
