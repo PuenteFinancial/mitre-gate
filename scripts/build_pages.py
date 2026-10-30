@@ -521,7 +521,32 @@ def subpage(path, eyebrow, h1, lede, extra="", banner=True, title=None, banner_l
     write(path, head(path, title, "", True) + header(path) + main + footer())
 
 
-subpage("/financing/", "Financing", "Financing", "How we make the work easy to fund. This page is on its way.")
+FIN_PRODUCTS = ["SMB Lending", "Purchase Order Financing", "Factoring", "Letters of Credit"]
+fin_tiles = "\n".join(f"""          <article class="tile">
+            <p class="tile__n">{i:02d}</p>
+            <h3 class="tile__title">{t}</h3>
+          </article>""" for i, t in enumerate(FIN_PRODUCTS, 1))
+FINANCING_MAIN = f"""
+  <main id="page">
+    <section class="phero" aria-labelledby="fin-title">
+      <div class="wrap">
+        <p class="eyebrow eyebrow--row">Trade Financing <span class="badge"><span class="badge__dot" aria-hidden="true"></span>Coming soon</span></p>
+        <h1 class="h-display" id="fin-title">Payments and cash management that accelerate growth.</h1>
+        <p class="lede">Growth stalls when cash is tied up in inventory and unpaid invoices. We help you fund purchases, pay suppliers on time and collect faster, with a clear view of your cash across all the systems you already run.</p>
+        <a class="btn btn--primary" href="/contact/">Contact us <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+    <section class="sec" aria-labelledby="fin-products-title">
+      <div class="wrap">
+        <h2 class="fin__k" id="fin-products-title">What's coming</h2>
+        <div class="tiles tiles--4">
+{fin_tiles}
+        </div>
+      </div>
+    </section>
+  </main>
+"""
+write("/financing/", head("/financing/", "Financing | Mitre", "", True) + header("/financing/") + FINANCING_MAIN + footer())
 subpage("/industries/", "Industries", "Where we work.", "We embed with operators in six industries. Pick yours to see how we help.",
         extra="\n" + pills("Choose an industry"))
 subpage("/careers/", "Work with us", "Careers", "Explore roles at Mitre.", title="Careers", banner_label="No open roles at this time.")

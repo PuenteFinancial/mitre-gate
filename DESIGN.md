@@ -127,6 +127,10 @@ Removed 2026-10-29: the careers band (`.careers`), markup and CSS in `git show a
 Also styled but not on any page: **duo cards** (`.duo`), two tall image cards with a dark gradient, a serif headline and a light button. Removed from
 the homepage 2026-10-29; markup in `git show b91eac5:index.html`.
 
+Financing page (`/financing/`): a coming-soon page. The `.phero` hero carries the **Badge** beside
+its eyebrow (centered), then a small "What's coming" label over four title-only tiles (`.tiles--4`:
+four across, two under 860px, one under 480px). Still `noindex`.
+
 Services is built out (see above). The remaining placeholder subpages use `.phero` (centered eyebrow, display title and lede) plus a wide
 `.phero__ph` placeholder block.
 
