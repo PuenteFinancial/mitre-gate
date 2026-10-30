@@ -412,7 +412,7 @@ faq = "\n".join(f"""          <details class="faq__item">
 
 SERVICES_MAIN = f"""
   <main id="page">
-    <section class="phero phero--photo" aria-labelledby="svc-title">
+    <section class="phero phero--photo phero--tight" aria-labelledby="svc-title">
       <div class="wrap">
        <div class="phero__box">
         <img class="phero__bg" src="/assets/photos/water.jpg?v={ver("assets/photos/water.jpg")}" alt="" width="2000" height="1125" fetchpriority="high" decoding="async" />

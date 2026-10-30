@@ -437,6 +437,8 @@ a { color: var(--ocean); text-decoration: none; }
 .phero--photo h1 { color: var(--paper-raised); }
 .phero--photo .lede { color: var(--blue-100); }
 .phero--photo :focus-visible { outline-color: var(--paper); }
+/* a hero with a longer headline trims its padding so the box matches the others in height */
+.phero--tight .phero__box { padding-block: clamp(48px, 5.4vw, 77px); }
 /* busy photos (lots of bright detail) get a heavier overlay so the text still reads */
 .phero--busy .phero__box::before { background: radial-gradient(70% 85% at 50% 45%, color-mix(in srgb, var(--blue-800) 72%, transparent), color-mix(in srgb, var(--blue-800) 35%, transparent)); }
 /* the dark badge would vanish on the photo, so it turns light */
