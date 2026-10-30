@@ -437,6 +437,11 @@ a { color: var(--ocean); text-decoration: none; }
 .phero--photo h1 { color: var(--paper-raised); }
 .phero--photo .lede { color: var(--blue-100); }
 .phero--photo :focus-visible { outline-color: var(--paper); }
+/* busy photos (lots of bright detail) get a heavier overlay so the text still reads */
+.phero--busy .phero__box::before { background: radial-gradient(70% 85% at 50% 45%, color-mix(in srgb, var(--blue-800) 72%, transparent), color-mix(in srgb, var(--blue-800) 35%, transparent)); }
+/* the dark badge would vanish on the photo, so it turns light */
+.phero--photo .badge { background: var(--paper-raised); color: var(--blue-800); }
+.phero--photo .badge__dot, .phero--photo .badge__dot::after { background: var(--green-400); }
 
 /* ---------- financing page (coming soon) ---------- */
 .phero .eyebrow--row { justify-content: center; }

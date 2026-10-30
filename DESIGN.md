@@ -101,7 +101,9 @@ Services page (`/services/`):
 - **Photo hero** (`.phero--photo` / `.phero__box`): the page hero boxed in a rounded `--radius-lg` card
   inside `.wrap` (not edge to edge), with a cover photo (`.phero__bg`, decorative `alt=""`) under a soft
   `--blue-800` overlay. Text turns light: green eyebrow, cream headline, `--blue-100` lede, `.btn--light`.
-  Services uses the water photo (`assets/photos/water.jpg`).
+  Services uses the water photo (`assets/photos/water.jpg`); Financing uses the glass towers
+  (`assets/photos/glass-towers.jpg`) with `.phero--busy`, a heavier overlay for photos with lots of
+  bright detail. On the photo the **Badge** turns light (cream pill, dark text).
 
 - **Value tiles** (`.tiles` / `.tile`): three equal quiet cards on `--paper-raised` with a `--stone`
   hairline and `--radius-md`. A mono number in `--forest`, a Manrope 700 title in `--blue-800`, body in
@@ -132,7 +134,7 @@ Removed 2026-10-29: the careers band (`.careers`), markup and CSS in `git show a
 Also styled but not on any page: **duo cards** (`.duo`), two tall image cards with a dark gradient, a serif headline and a light button. Removed from
 the homepage 2026-10-29; markup in `git show b91eac5:index.html`.
 
-Financing page (`/financing/`): a coming-soon page. The `.phero` hero carries the **Badge** beside
+Financing page (`/financing/`): a coming-soon page. The photo hero (`.phero--photo`) carries the **Badge** beside
 its eyebrow (centered), then a small "What's coming" label over four short tiles with a one-line description each (`.tiles--4`:
 four across, two under 860px, one under 480px). Still `noindex`.
 

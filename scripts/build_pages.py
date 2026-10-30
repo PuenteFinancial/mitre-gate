@@ -537,12 +537,15 @@ fin_tiles = "\n".join(f"""          <article class="tile">
           </article>""" for i, (t, b) in enumerate(FIN_PRODUCTS, 1))
 FINANCING_MAIN = f"""
   <main id="page">
-    <section class="phero" aria-labelledby="fin-title">
+    <section class="phero phero--photo phero--busy" aria-labelledby="fin-title">
       <div class="wrap">
+       <div class="phero__box">
+        <img class="phero__bg" src="/assets/photos/glass-towers.jpg?v={ver("assets/photos/glass-towers.jpg")}" alt="" width="2000" height="1125" fetchpriority="high" decoding="async" />
         <p class="eyebrow eyebrow--row">Trade Financing <span class="badge"><span class="badge__dot" aria-hidden="true"></span>Coming soon</span></p>
         <h1 class="h-display" id="fin-title">Payments and cash management that accelerate growth.</h1>
         <p class="lede">Growth stalls when cash is tied up in inventory and unpaid invoices. We help you fund purchases, pay suppliers on time and collect faster, with a clear view of your cash across all the systems you already run.</p>
-        <a class="btn btn--primary" href="/contact/">Contact us <span aria-hidden="true">→</span></a>
+        <a class="btn btn--light" href="/contact/">Contact us <span aria-hidden="true">→</span></a>
+       </div>
       </div>
     </section>
     <section class="sec" aria-labelledby="fin-products-title">
